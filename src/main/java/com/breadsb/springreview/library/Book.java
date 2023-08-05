@@ -17,7 +17,7 @@ public class Book {
 
     @Id
     @GeneratedValue
-    @NotNull
+    @Column(unique = true)
     private int id;
 
     @NotNull
@@ -25,8 +25,15 @@ public class Book {
 
     @NotNull
     @ManyToOne
+    @JoinColumn(name = "author_id")
     private Author author;
 
     @NotNull
     private LocalDate releaseDate;
+
+    public Book(String title, Author author, LocalDate releaseDate) {
+        this.title = title;
+        this.author = author;
+        this.releaseDate = releaseDate;
+    }
 }

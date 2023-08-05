@@ -19,7 +19,7 @@ public class Author {
 
     @Id
     @GeneratedValue
-    @NotNull
+    @Column(unique = true)
     private int id;
 
     @NotNull
