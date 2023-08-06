@@ -33,7 +33,12 @@ public class Author {
     @NotNull
     private LocalDate birthday;
 
-    @OneToMany
+    @OneToMany(
+            targetEntity = Book.class,
+            mappedBy = "author",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     private List<Book> bookList;
 
     public Author(String firstName, String lastName, LocalDate birthday) {

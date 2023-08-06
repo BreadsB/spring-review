@@ -9,5 +9,4 @@ class SpringReviewApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

@@ -10,7 +10,7 @@ import java.util.Properties;
 public enum DbConnector {
 
     INSTANCE;
-    private final String CONNECTION_URL = "jdbc:postgresql://localhost:5432/postgres";
+    private final String CONNECTION_URL = "jdbc:postgresql://localhost:5432/library";
     private Connection connection;
 
     DbConnector() {
