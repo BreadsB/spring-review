@@ -24,8 +24,8 @@ public class Book {
     private String title;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "author_id")
+    @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 
     @NotNull

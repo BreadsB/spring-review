@@ -27,6 +27,6 @@ class AuthorTest {
         Optional<Author> dbAuthor = authorDao.findById(id);
         Assertions.assertTrue(dbAuthor.isPresent());
 
-        authorDao.deleteById(id);
+//        authorDao.deleteById(id);
     }
 }
