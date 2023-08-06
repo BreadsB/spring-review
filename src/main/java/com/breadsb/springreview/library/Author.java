@@ -47,4 +47,12 @@ public class Author {
         this.birthday = birthday;
         this.bookList = new ArrayList<>();
     }
+
+    public void addBook(Book book) {
+        bookList.add(book);
+    }
+
+    public void removeBook(Book book) {
+        bookList.remove(book);
+    }
 }
