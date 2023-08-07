@@ -4,18 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.0'
 }
 
-group = 'com.breadsb'
-version = '0.0.1-SNAPSHOT'
-
-java {
-	sourceCompatibility = '17'
-}
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
+apply from: rootProject.file('shared.gradle')
 
 repositories {
 	mavenCentral()
@@ -37,4 +26,18 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+
+group = 'com.breadsb'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
 }

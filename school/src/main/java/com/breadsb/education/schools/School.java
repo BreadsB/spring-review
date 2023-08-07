@@ -1,7 +1,7 @@
-package com.breadsb.springreview.education.schools;
+package com.breadsb.education.schools;
 
-import com.breadsb.springreview.education.students.Student;
-import com.breadsb.springreview.education.teachers.Teacher;
+import com.breadsb.education.students.Student;
+import com.breadsb.education.teachers.Teacher;
 
 import java.util.List;
 
