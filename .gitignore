@@ -36,3 +36,4 @@ out/
 ### VS Code ###
 .vscode/
 /src/main/java/com/breadsb/springreview/connection/LoginData.java
+/src/main/java/com/breadsb/springreview/education/teachers/
