@@ -1,6 +1,7 @@
 package com.breadsb.springreview.library;
 
 import com.breadsb.springreview.library.dao.AuthorDao;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -32,8 +33,8 @@ class AuthorTest {
         authorDao.deleteById(id);
     }
 
-//    @Disabled
     @Test
+    @Transactional // Automatic rollback after test is finished
     void findAuthorsHavingMoreThan2Books() {
         Author author1 = new Author("Jane", "Austen", LocalDate.of(1775, 12, 16));
         Author author2 = new Author("Charles", "Dickens", LocalDate.of(1812, 2, 7));
@@ -73,7 +74,5 @@ class AuthorTest {
 
         List<Author> authorsWithMoreThan3Books = authorDao.findByBookListGreaterThanEqual(3);
         Assertions.assertFalse(authorsWithMoreThan3Books.isEmpty());
-
-
     }
 }
