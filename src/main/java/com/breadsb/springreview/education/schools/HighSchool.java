@@ -1,10 +1,9 @@
-package com.breadsb.education.schools;
+package com.breadsb.springreview.education.schools;
 
-import com.breadsb.education.students.Student;
-import com.breadsb.education.teachers.Teacher;
+import com.breadsb.springreview.education.students.Student;
+import com.breadsb.springreview.education.teachers.Teacher;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
 
 import java.util.List;
 

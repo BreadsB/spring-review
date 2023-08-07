@@ -1,10 +1,11 @@
-package com.breadsb.education.teachers;
+package com.breadsb.springreview.education.teachers;
 
-import com.breadsb.education.schools.School;
+
+import com.breadsb.springreview.education.schools.School;
 
 import java.util.List;
 
-public class PETeacher implements Teacher {
+public class EnglishTeacher implements Teacher {
     @Override
     public String getFistName() {
         return null;

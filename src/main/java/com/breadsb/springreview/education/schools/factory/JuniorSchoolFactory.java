@@ -1,7 +1,7 @@
-package com.breadsb.education.schools.factory;
+package com.breadsb.springreview.education.schools.factory;
 
-import com.breadsb.education.schools.JuniorSchool;
-import com.breadsb.education.schools.School;
+import com.breadsb.springreview.education.schools.JuniorSchool;
+import com.breadsb.springreview.education.schools.School;
 import org.springframework.stereotype.Component;
 
 @Component

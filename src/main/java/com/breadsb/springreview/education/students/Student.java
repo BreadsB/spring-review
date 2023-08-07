@@ -1,6 +1,6 @@
-package com.breadsb.education.students;
+package com.breadsb.springreview.education.students;
 
-import com.breadsb.education.schools.School;
+import com.breadsb.springreview.education.schools.School;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
