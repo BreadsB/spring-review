@@ -17,6 +17,8 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
+    @Column(unique = true)
     private long id;
 
     @NotNull
@@ -33,6 +35,7 @@ public class Student {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "school_id")
     private School school;
 
     public Student(String firstName, String lastName, LocalDate birthDate) {
