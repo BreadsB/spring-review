@@ -3,6 +3,7 @@ package com.breadsb.school.education;
 import com.breadsb.school.education.services.SchoolService;
 import com.breadsb.school.education.services.StudentService;
 import com.breadsb.school.education.services.TeacherService;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,8 @@ public class SchoolAppTest {
         School retrievedSchool = schoolService.getSchool(id);
 
         Assertions.assertNotNull(retrievedSchool);
+
+        String str = RandomStringUtils.randomAlphabetic(5);
+        System.out.println(str);
     }
 }

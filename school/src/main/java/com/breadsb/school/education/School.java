@@ -32,12 +32,12 @@ public class School {
     @NotNull
     private String address;
 
-//    @OneToMany(
-//            mappedBy = "school",
-//            cascade = CascadeType.ALL,
-//            orphanRemoval = true
-//    )
-//    private List<Student> students;
+    @OneToMany(
+            mappedBy = "school",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Student> students;
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
