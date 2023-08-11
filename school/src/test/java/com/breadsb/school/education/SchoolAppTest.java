@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @SpringBootTest
 public class SchoolAppTest {
@@ -31,6 +30,7 @@ public class SchoolAppTest {
         Teacher teacher = new Teacher("Thomas", "Shelby", SchoolSubject.BIOLOGY);
         school.addTeacher(teacher);
         student.setSchool(school);
+        school.addStudent(student);
 
         schoolService.addSchool(school);
         long id = school.getId();

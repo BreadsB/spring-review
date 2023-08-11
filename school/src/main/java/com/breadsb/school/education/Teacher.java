@@ -13,7 +13,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table
 public class Teacher {
 
     @Id
@@ -23,11 +22,11 @@ public class Teacher {
     private long id;
 
     @NotNull
-    @Column(name = "first_name")
+    @Column(name = "first_name", length = 100)
     private String firstName;
 
     @NotNull
-    @Column(name = "last_name")
+    @Column(name = "last_name", length = 100)
     private String lastName;
 
     @NotNull

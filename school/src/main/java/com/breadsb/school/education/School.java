@@ -14,7 +14,6 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table
 public class School {
 
     @Id
@@ -53,11 +52,12 @@ public class School {
         this.city = city;
         this.address = address;
         this.teachers = new ArrayList<>();
+        this.students = new ArrayList<>();
     }
 
-//    public void addStudent(Student student) {
-//        students.add(student);
-//    }
+    public void addStudent(Student student) {
+        students.add(student);
+    }
 
     public void addTeacher(Teacher teacher) {
         teachers.add(teacher);

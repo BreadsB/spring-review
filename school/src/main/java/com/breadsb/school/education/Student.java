@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Entity
-@Table
 public class Student {
 
     @Id
@@ -31,6 +30,7 @@ public class Student {
 
     @NotNull
     @Column(name = "birth_date")
+    @Temporal(TemporalType.DATE)
     private LocalDate birthDate;
 
     @NotNull

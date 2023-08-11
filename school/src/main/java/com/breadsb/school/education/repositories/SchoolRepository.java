@@ -1,11 +1,7 @@
 package com.breadsb.school.education.repositories;
 
 import com.breadsb.school.education.School;
-import jakarta.transaction.Transactional;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-@Transactional
-public interface SchoolRepository extends CrudRepository<School, Long> {
+public interface SchoolRepository extends JpaRepository<School, Long> {
 }
