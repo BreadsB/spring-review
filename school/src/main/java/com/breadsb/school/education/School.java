@@ -55,12 +55,14 @@ public class School {
         this.students = new ArrayList<>();
     }
 
-    public void addStudent(Student student) {
-        students.add(student);
+    public void addStudent(Student s) {
+        s.setSchool(this); // helper method
+        this.students.add(s);
     }
 
-    public void addTeacher(Teacher teacher) {
-        teachers.add(teacher);
+    public void addTeacher(Teacher t) {
+        t.addSchool(this);
+        this.teachers.add(t);
     }
 
     public void removeTeacher(Teacher teacher) {

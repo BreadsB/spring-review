@@ -44,5 +44,8 @@ public class Student {
         this.birthDate = birthDate;
     }
 
-
+    public void setSchool(School s) {
+        s.addStudent(this);
+        this.school = s;
+    }
 }

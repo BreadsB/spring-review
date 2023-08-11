@@ -44,8 +44,9 @@ public class Teacher {
         this.schools = new ArrayList<>();
     }
 
-    public void addSchool(School school) {
-        schools.add(school);
+    public void addSchool(School s) {
+        s.addTeacher(this);
+        this.schools.add(s);
     }
 
     public void removeSchool(School school) {
