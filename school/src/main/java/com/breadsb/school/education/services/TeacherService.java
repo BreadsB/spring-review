@@ -3,6 +3,7 @@ package com.breadsb.school.education.services;
 import com.breadsb.school.education.SchoolSubject;
 import com.breadsb.school.education.Teacher;
 import com.breadsb.school.education.repositories.TeacherRepository;
+import jakarta.persistence.EntityExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,10 @@ public class TeacherService {
         return repository.findAll();
     }
 
+    public Teacher getTeacherById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
     public List<Teacher> getTeachersTeachingSubject(SchoolSubject ss) {
         return repository.findBySchoolSubject(ss);
     }
@@ -37,5 +42,18 @@ public class TeacherService {
 
     public void saveTeacherCollection(Collection<Teacher> teachers) {
         repository.saveAll(teachers);
+    }
+
+    public void deleteTeacher(Long id) {
+        repository.deleteById(id);
+    }
+
+    public void updateTeacherById(Teacher teacher, Long id) {
+        Teacher t = repository.findById(id).orElseThrow(EntityExistsException::new);
+        t.setFirstName(teacher.getFirstName());
+        t.setLastName(teacher.getLastName());
+        t.setSchoolSubject(teacher.getSchoolSubject());
+        t.setSchools(teacher.getSchools());
+        repository.save(t);
     }
 }
