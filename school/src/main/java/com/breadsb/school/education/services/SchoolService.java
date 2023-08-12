@@ -5,6 +5,8 @@ import com.breadsb.school.education.repositories.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SchoolService {
 
@@ -23,7 +25,7 @@ public class SchoolService {
         repository.deleteById(id);
     }
 
-    public void addSchool(School school) {
+    public void saveSchool(School school) {
         repository.save(school);
     }
 
@@ -35,5 +37,9 @@ public class SchoolService {
         if (school.getTeachers()!=null) {
             schoolFromRepo.setTeachers(school.getTeachers());
         }
+    }
+
+    public List<School> getSchools() {
+        return repository.findAll();
     }
 }

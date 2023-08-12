@@ -33,7 +33,6 @@ public class Student {
     @Temporal(TemporalType.DATE)
     private LocalDate birthDate;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_id")
     private School school;
@@ -45,7 +44,6 @@ public class Student {
     }
 
     public void setSchool(School s) {
-//        s.addStudent(this);
         this.school = s;
     }
 }

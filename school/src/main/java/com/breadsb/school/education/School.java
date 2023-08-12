@@ -38,10 +38,7 @@ public class School {
     )
     private List<Student> students;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "school_teacher",
     joinColumns = @JoinColumn(name = "school_id"),
     inverseJoinColumns = @JoinColumn(name = "teacher_id"))
@@ -61,7 +58,7 @@ public class School {
     }
 
     public void addTeacher(Teacher t) {
-//        t.addSchool(this);
+//        t.saveSchool(this);
         this.teachers.add(t);
     }
 

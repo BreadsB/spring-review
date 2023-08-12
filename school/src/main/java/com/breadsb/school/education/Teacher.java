@@ -11,7 +11,7 @@ import java.util.List;
 
 @NamedQuery(
         name = "Teacher.retrieveTeachersWithSubjectAndSchoolsGreaterThen",
-        query = "FROM Teacher WHERE schoolSubject = :ss AND schools >= :sq"
+        query = "SELECT t FROM Teacher t JOIN t.schools s WHERE t.schoolSubject = :ss GROUP BY t HAVING COUNT(s) >= :sq"
 )
 @Getter
 @Setter
@@ -49,7 +49,6 @@ public class Teacher {
     }
 
     public void addSchool(School s) {
-//        s.addTeacher(this);
         this.schools.add(s);
     }
 

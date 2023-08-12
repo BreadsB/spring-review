@@ -3,7 +3,7 @@ VALUES ('John', 'Smith', 'ENGLISH'),
        ('Jane', 'Doe', 'MATH'),
        ('Michael', 'Johnson', 'BIOLOGY'),
        ('Emily', 'Williams', 'CHEMISTRY'),
-       ('Robert', 'Brown', 'PHYSICAL_EDUCATION'),
+--        ('Robert', 'Brown', 'PHYSICAL_EDUCATION'),
        ('David', 'Miller', 'CHEMISTRY'),
        ('Jessica', 'Anderson', 'CHEMISTRY'),
        ('Andrew', 'Wilson', 'CHEMISTRY');
