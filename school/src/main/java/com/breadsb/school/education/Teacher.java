@@ -9,6 +9,10 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(
+        name = "Teacher.retrieveTeachersWithSubjectAndSchoolsGreaterThen",
+        query = "FROM Teacher WHERE schoolSubject = :ss AND schools >= :sq"
+)
 @Getter
 @Setter
 @NoArgsConstructor
