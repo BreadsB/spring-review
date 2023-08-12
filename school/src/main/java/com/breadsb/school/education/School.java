@@ -56,12 +56,12 @@ public class School {
     }
 
     public void addStudent(Student s) {
-        s.setSchool(this); // helper method
+//        s.setSchool(this); // helper method
         this.students.add(s);
     }
 
     public void addTeacher(Teacher t) {
-        t.addSchool(this);
+//        t.addSchool(this);
         this.teachers.add(t);
     }
 

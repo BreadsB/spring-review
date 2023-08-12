@@ -45,7 +45,7 @@ public class Teacher {
     }
 
     public void addSchool(School s) {
-        s.addTeacher(this);
+//        s.addTeacher(this);
         this.schools.add(s);
     }
 
