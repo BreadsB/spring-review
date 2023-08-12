@@ -36,6 +36,6 @@ class TeacherController {
 
     @PostMapping
     public void createTeacher(Teacher teacher) {
-
+        teacherService.saveTeacher(teacher);
     }
 }
