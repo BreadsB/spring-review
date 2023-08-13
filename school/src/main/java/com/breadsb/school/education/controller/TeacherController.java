@@ -1,6 +1,7 @@
 package com.breadsb.school.education.controller;
 
 import com.breadsb.school.education.Teacher;
+import com.breadsb.school.education.exceptions.ResourceNotFoundException;
 import com.breadsb.school.education.services.TeacherService;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
@@ -48,5 +49,12 @@ class TeacherController {
     @GetMapping("/value")
     public String getSomeValue(@RequestParam String b1) {
         return "This is my value: " + b1;
+    }
+
+    @GetMapping("/exception/{exception_id}")
+    public void getSpecificException(@PathVariable("exception_id") String pException) {
+        if ("not_found".equals(pException)) {
+            throw new ResourceNotFoundException("resource not found");
+        }
     }
 }
