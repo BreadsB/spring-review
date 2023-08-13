@@ -2,17 +2,19 @@ package com.breadsb.school.education.controller;
 
 import com.breadsb.school.education.Teacher;
 import com.breadsb.school.education.services.TeacherService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("teachers")
 class TeacherController {
 
-    @Autowired
-    TeacherService teacherService;
+    private final TeacherService teacherService;
 
     @GetMapping(produces = "application/json")
     public List<Teacher> getTeachers() {
@@ -21,11 +23,11 @@ class TeacherController {
 
     @GetMapping(value = "/{id}", produces = "application/json")
     public Teacher getTeacher(@PathVariable Long id) {
-        return teacherService.getTeacherById(id);
+        return teacherService.getTeacherById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void deleteTeacher(Long id) {
+    public void deleteTeacher(@PathVariable Long id) {
         teacherService.deleteTeacher(id);
     }
 
@@ -34,8 +36,14 @@ class TeacherController {
         teacherService.updateTeacherById(teacher, id);
     }
 
-    @PostMapping
-    public void createTeacher(Teacher teacher) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public PostResponse createTeacher(@RequestBody Teacher teacher) {
         teacherService.saveTeacher(teacher);
+        return new PostResponse("Teacher created"); // This will return body!
+    }
+
+    @GetMapping("/value")
+    public String getSomeValue(@RequestParam String b1) {
+        return "This is my value: " + b1;
     }
 }

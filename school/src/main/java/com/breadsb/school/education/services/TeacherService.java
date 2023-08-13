@@ -4,32 +4,29 @@ import com.breadsb.school.education.SchoolSubject;
 import com.breadsb.school.education.Teacher;
 import com.breadsb.school.education.repositories.TeacherRepository;
 import jakarta.persistence.EntityExistsException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class TeacherService {
 
     private final TeacherRepository repository;
-
-    @Autowired
-    TeacherService(TeacherRepository repository) {
-        this.repository = repository;
-    }
 
     public List<Teacher> getTeachers() {
         return repository.findAll();
     }
 
-    public Teacher getTeacherById(Long id) {
-        return repository.findById(id).orElse(null);
+    public Optional<Teacher> getTeacherById(Long id) {
+        return repository.findById(id);
     }
 
     public List<Teacher> getTeachersTeachingSubject(SchoolSubject ss) {
-        return repository.findBySchoolSubject(ss);
+        return repository.findAllBySchoolSubject(ss);
     }
 
     public void saveTeacher(Teacher teacher) {

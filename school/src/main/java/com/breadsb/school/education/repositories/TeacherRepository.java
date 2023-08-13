@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
-    List<Teacher> findBySchoolSubject(SchoolSubject schoolSubject);
+    List<Teacher> findAllBySchoolSubject(SchoolSubject schoolSubject);
 
     @Query
     List<Teacher> retrieveTeachersWithSubjectAndSchoolsGreaterThen(@Param("ss")SchoolSubject ss, @Param("sq")int schools);

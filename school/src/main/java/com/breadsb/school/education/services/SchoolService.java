@@ -2,20 +2,16 @@ package com.breadsb.school.education.services;
 
 import com.breadsb.school.education.School;
 import com.breadsb.school.education.repositories.SchoolRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class SchoolService {
 
     private final SchoolRepository repository;
-
-    @Autowired
-    SchoolService(SchoolRepository schoolRepository) {
-        this.repository = schoolRepository;
-    }
 
     public School getSchool(long id) {
         return repository.findById(id).orElse(null);
