@@ -2,9 +2,8 @@ package com.breadsb.school.education.controller;
 
 import com.breadsb.school.education.Teacher;
 import com.breadsb.school.education.services.TeacherService;
-import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +23,10 @@ class TeacherController {
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity getTeacher(@PathVariable Long id) {
-        try {
-            return new ResponseEntity<>(teacherService.getTeacherById(id), HttpStatus.FOUND);
-        } catch (EntityNotFoundException e) {
-            return new ResponseEntity<>(new Teacher(), HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Teacher> getTeacher(@PathVariable @Min(1) Long id) {
+
+        Teacher teacher = teacherService.getTeacherById(id);
+        return ResponseEntity.ok().body(teacher);
     }
 
     @DeleteMapping(value = "/{id}")

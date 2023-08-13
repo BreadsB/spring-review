@@ -2,9 +2,9 @@ package com.breadsb.school.education.services;
 
 import com.breadsb.school.education.SchoolSubject;
 import com.breadsb.school.education.Teacher;
+import com.breadsb.school.education.exceptions.ResourceNotFoundException;
 import com.breadsb.school.education.repositories.TeacherRepository;
 import jakarta.persistence.EntityExistsException;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class TeacherService {
     }
 
     public Teacher getTeacherById(Long id) {
-        return repository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Teacher with id: " + id + " not found"));
     }
 
     public List<Teacher> getTeachersTeachingSubject(SchoolSubject ss) {
