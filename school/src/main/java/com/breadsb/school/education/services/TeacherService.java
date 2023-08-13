@@ -4,12 +4,12 @@ import com.breadsb.school.education.SchoolSubject;
 import com.breadsb.school.education.Teacher;
 import com.breadsb.school.education.repositories.TeacherRepository;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,8 +21,8 @@ public class TeacherService {
         return repository.findAll();
     }
 
-    public Optional<Teacher> getTeacherById(Long id) {
-        return repository.findById(id);
+    public Teacher getTeacherById(Long id) {
+        return repository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     public List<Teacher> getTeachersTeachingSubject(SchoolSubject ss) {
