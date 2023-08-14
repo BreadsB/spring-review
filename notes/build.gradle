@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id 'spring-review.library-conventions'
+}
+
+group = 'com.breadsb'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
