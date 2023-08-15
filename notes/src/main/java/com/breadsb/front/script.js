@@ -1,15 +1,20 @@
 $(document).ready(function() {
+    const inputTitle = $('#inputTitle');
     const inputText = $('#inputText');
     const sendButton = $('#sendButton');
     const clearButton = $('#clearButton');
-    const myForm = $('#myForm');
+    const apiRoot = "http://localhost:8080/v1/tasks";
 
-    sendButton.on('click', function() {
-        const inputValue = inputText.val();
+    function sendData() {
+        const inputTitleValue = inputTitle.val();
+        const inputTextValue = inputText.val();
         $.ajax({
-            url: 'teachers', // Zmień na właściwą ścieżkę do swojego serwera
+            url: '/api/',
             method: 'POST',
-            data: { text: inputValue },
+            data: {
+                title: inputTitleValue,
+                text: inputTextValue
+            },
             success: function(response) {
                 alert('Dane zostały przesłane na serwer.');
             },
@@ -17,6 +22,10 @@ $(document).ready(function() {
                 console.error('Wystąpił błąd podczas przesyłania danych: ' + error);
             }
         });
+    }
+
+
+    sendButton.on('click', function() {
     });
 
     clearButton.on('click', function() {
