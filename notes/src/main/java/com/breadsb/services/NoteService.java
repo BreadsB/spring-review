@@ -3,7 +3,6 @@ package com.breadsb.services;
 import com.breadsb.entities.Note;
 import com.breadsb.repositories.NoteRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +15,7 @@ public class NoteService {
         repository.save(note);
     }
 
-    public Note getNote(Long id) {
+    public Note getNoteById(Long id) {
         return repository.findById(id).orElseThrow();
     }
 }
