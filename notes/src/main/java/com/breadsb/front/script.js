@@ -9,14 +9,19 @@ $(document).ready(function() {
         const inputTitleValue = inputTitle.val();
         const inputTextValue = inputText.val();
         $.ajax({
-            url: '/api/',
+            url: apiRoot,
+            processData: false,
             method: 'POST',
-            data: {
+            contentType: "application/json; charset=utf-8"
+            dataType: 'json',
+            data: JSON.stringfy({
                 title: inputTitleValue,
                 text: inputTextValue
-            },
+            }),
             success: function(response) {
-                alert('Dane zostały przesłane na serwer.');
+                if(data.status === 200) {
+                    alert('Dane zostały przesłane na serwer.');
+                }
             },
             error: function(xhr, status, error) {
                 console.error('Wystąpił błąd podczas przesyłania danych: ' + error);
@@ -24,11 +29,19 @@ $(document).ready(function() {
         });
     }
 
-
     sendButton.on('click', function() {
+        sendData();
     });
 
     clearButton.on('click', function() {
         inputText.val('');
     });
+
+    function retrieveMessage() {
+        $.ajax({
+            url: apiRoot,
+            method: GET,
+
+        })
+    }
 });

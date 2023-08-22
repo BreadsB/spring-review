@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formularz z Ajax</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="view-messages.js"></script>
+    <link rel="stylesheet" href="view-messages.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Formularz z Ajax</h1>
+<form id="myForm">
+    <h1 style="text-align: center;">View notes</h1>
+    <div class="menu-container">
+        <div class="menu-item"><a href="index.html">Create Message</a></div>
+        <div class="menu-item" style="font-weight: bold;">View messages</div>
+    </div>
+</form>
+<div style="text-align: center; font-weight: bold">Lista elementów:</div>
+<div class="container2">
+    <label class="messages_list">
+        <select class="list" messages_list></select>
+    </label>
+    <button id="retrieveButton">Retrieve message</button>
+</div>
+
+<p>Title:</p>
+<p class="message_title"></p>
+<p>Body:</p>
+<p class="message_body"></p>
+</select>
+</body>
+</html>

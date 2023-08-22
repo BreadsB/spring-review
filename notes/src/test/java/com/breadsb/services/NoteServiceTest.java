@@ -7,25 +7,26 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
+
 @SpringBootTest
-@Transactional
 class NoteServiceTest {
 
     @Autowired
     NoteService service;
 
     @Test
+    @Transactional
     void givenNote_whenGetById_thenReceiveNote() {
-        Note note = new Note();
-        note.setTitle("Test title");
-        note.setBody("Test body");
-
-        service.saveNote(note);
-        Long id = note.getId();
-
+        //given
+        Note note1 = new Note("Test title1", "Test body1");
+        //when
+        service.createNote(note1);
+        //then
+        Long id = note1.getId();
         Note receivedNote = service.getNoteById(id);
-
         Assertions.assertNotNull(receivedNote);
-        Assertions.assertEquals("Test title", receivedNote.getTitle());
+        Assertions.assertEquals("Test title1", receivedNote.getTitle());
+        Assertions.assertEquals(receivedNote.getCreatedAt().getDayOfYear(), LocalDateTime.now().getDayOfYear());
     }
 }
