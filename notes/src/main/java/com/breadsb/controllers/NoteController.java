@@ -2,21 +2,20 @@ package com.breadsb.controllers;
 
 import com.breadsb.entities.Note;
 import com.breadsb.services.NoteService;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/notes")
+@RequestMapping("api/notes/")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class NoteController {
 
     private final NoteService service;
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Note get(@PathVariable Long id) {
         return service.getNoteById(id);
     }
