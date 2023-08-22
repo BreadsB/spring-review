@@ -1,6 +1,7 @@
 package com.breadsb.services;
 
 import com.breadsb.entities.Note;
+import com.breadsb.exceptions.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -29,4 +30,20 @@ class NoteServiceTest {
         Assertions.assertEquals("Test title1", receivedNote.getTitle());
         Assertions.assertEquals(receivedNote.getCreatedAt().getDayOfYear(), LocalDateTime.now().getDayOfYear());
     }
+
+    @Test
+    @Transactional
+    void testDeleteNoteFromDb() {
+        Note note = new Note("My test note", "Something in body");
+        service.createNote(note);
+        long id = note.getId();
+
+        service.deleteNoteById(id);
+
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            Note receivedNote = service.getNoteById(id);
+        });
+    }
+
+
 }
