@@ -3,6 +3,7 @@ package com.breadsb.controllers;
 import com.breadsb.entities.Note;
 import com.breadsb.services.NoteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,27 +17,30 @@ public class NoteController {
     private final NoteService service;
 
     @GetMapping("{id}")
-    public Note get(@PathVariable Long id) {
-        return service.getNoteById(id);
+    public ResponseEntity<Note> get(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getNoteById(id));
     }
 
     @PostMapping
-    public void create(@RequestBody Note note) {
+    public ResponseEntity<Void> post(@RequestBody Note note) {
         service.createNote(note);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public List<Note> getAll() {
-        return service.getAllNotes();
+    public ResponseEntity<List<Note>> getAll() {
+        return ResponseEntity.ok(service.getAllNotes());
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @RequestBody Note note) {
+    public ResponseEntity<Note> put(@PathVariable Long id, @RequestBody Note note) {
         service.updateNote(id, note);
+        return ResponseEntity.ok(note);
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.deleteNoteById(id);
+        return ResponseEntity.ok().build();
     }
 }

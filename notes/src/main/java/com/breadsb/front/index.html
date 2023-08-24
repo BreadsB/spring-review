@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Formularz z Ajax</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script.js"></script>
     <link rel="stylesheet" href="main-style.css">
     <meta charset="UTF-8">
 </head>
+
 <body>
-<h1>Formularz z Ajax</h1>
-<form id="myForm">
+    <h1>Formularz z Ajax</h1>
     <h1 style="text-align: center;">Create note</h1>
     <div class="menu-container">
-        <div class="menu-item" style="font-weight: bold">Create Message</div>
+        <div class="menu-item">Create Message</div>
         <div class="menu-item"><a href="view-messages.html">View messages</a></div>
     </div>
-    <div style="background:#eeeeee;border:1px solid #cccccc;padding:5px 10px; text-align: center">Title</div>
-    <p style="margin-left: 40px; text-align: center"><input id="inputTitle" maxlength="100" name="Title" required="required" type="text" placeholder="Type title" /></p>
-    <p style="text-align: center">Note&#39;s body</p>
-    <p style="text-align: center;"><textarea id="inputText" placeholder="Type your message here" cols="70" name="Notes Body" required="required" rows="10"></textarea></p>
-    <p style="text-align: center;"><input name="button" id="sendButton" type="submit" value="Send" /></p>
-    <p style="text-align: center;"><input name="button" id="clearButton" type="button" value="Clear" /></p>
-</form>
-</body>
-</html>
+
+    <form action="/api/notes/" method="post">
+        <label for="inputTitle">Title:</label>
+        <input id="inputTitle" maxlength="100" name="Title" required="required" type="text" placeholder="Type title" />
+        <label for="inputText">Note&#39;s body</label>
+        <textarea id="inputText" placeholder="Type your message here" cols="70" name="Notes Body" required="required" rows="10"></textarea>
+        <input name="sendButton" class="button" id="sendButton" type="submit" value="Send data" />
+        <input name="clearButton" class="button" id="clearButton" type="reset" value="Clear fields" />
+    </form>
+
+    <script src="jquery-3.7.0.min.js"></script>
+    <script src="script.js"></script>
+</body></html>

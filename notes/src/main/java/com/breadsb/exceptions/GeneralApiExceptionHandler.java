@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GeneralApiExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
+    @ExceptionHandler( {ResourceNotFoundException.class} )
     @ResponseBody
     ResponseEntity<Object> resourceNotFoundException(ResourceNotFoundException e) {
 
