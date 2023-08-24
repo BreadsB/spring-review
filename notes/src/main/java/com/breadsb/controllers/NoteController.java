@@ -3,6 +3,7 @@ package com.breadsb.controllers;
 import com.breadsb.entities.Note;
 import com.breadsb.services.NoteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/notes/")
 @RequiredArgsConstructor
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class NoteController {
 
     private final NoteService service;
@@ -21,7 +22,7 @@ public class NoteController {
         return ResponseEntity.ok(service.getNoteById(id));
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> post(@RequestBody Note note) {
         service.createNote(note);
         return ResponseEntity.ok().build();
