@@ -26,6 +26,11 @@ form {
     align-items: center;
 }
 
+fieldset {
+    width: 100%;
+    text-align: center;
+}
+
 .button {
     margin: 1vh 0;
     width: 10%;

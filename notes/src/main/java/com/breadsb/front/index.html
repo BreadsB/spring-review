@@ -5,6 +5,8 @@
     <title>Formularz z Ajax</title>
     <link rel="stylesheet" href="main-style.css">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 
 <body>
@@ -15,15 +17,19 @@
         <div class="menu-item"><a href="view-messages.html">View messages</a></div>
     </div>
 
-    <form action="/api/notes/" method="post">
+    <form action="api/notes/" method="post" data-note-add-form>
         <label for="inputTitle">Title:</label>
         <input id="inputTitle" maxlength="100" name="Title" required="required" type="text" placeholder="Type title" />
         <label for="inputText">Note&#39;s body</label>
         <textarea id="inputText" placeholder="Type your message here" cols="70" name="Notes Body" required="required" rows="10"></textarea>
-        <input name="sendButton" class="button" id="sendButton" type="submit" value="Send data" />
-        <input name="clearButton" class="button" id="clearButton" type="reset" value="Clear fields" />
+        <fieldset style="width: 100%; text-align: center;">
+            <button type="submit" name="sendButton" class="button" id="sendButton">Send data</button>
+        </fieldset>
+        <button type="reset" name="clearButton" class="button" id="clearButton">Clear fields</button>
     </form>
 
     <script src="jquery-3.7.0.min.js"></script>
     <script src="script.js"></script>
-</body></html>
+</body>
+
+</html>
