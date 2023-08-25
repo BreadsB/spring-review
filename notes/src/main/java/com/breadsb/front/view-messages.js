@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var messages_list = $('[messages_list]');
     var retrieveButton = $('#retrieveButton');
-    var apiRoot = 'http://localhost:8080/api/notes';
+    var apiRoot = 'http://localhost:8080/api/notes/';
 
     function getAllMessages() {
         var requestUrl = apiRoot;

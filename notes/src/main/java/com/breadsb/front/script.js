@@ -3,7 +3,7 @@ $(document).ready(function () {
     var inputText = $('#inputText');
     var sendButton = $('#sendButton');
     var clearButton = $('#clearButton');
-    var apiRoot = "http://localhost:8080/api/notes/";
+    var apiRoot = "http://localhost:8080/notes/api/notes/";
 
     function postData(event) {
         event.preventDefault();
