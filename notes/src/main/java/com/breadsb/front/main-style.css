@@ -26,7 +26,7 @@ form {
     align-items: center;
 }
 
-fieldset {
+.fieldsets {
     width: 100%;
     text-align: center;
 }

@@ -3,16 +3,15 @@ $(document).ready(function () {
     var sendButton = $('#sendButton');
     var clearButton = $('#clearButton');
     var apiRoot = "http://localhost:8080/api/notes/";
+    var inputTitle = $('#inputTitle');
+    var inputText = $('#inputText');
 
     function postData(event) {
         event.preventDefault();
 
-        var inputTitleValue = $('#inputTitle').val();
-        var inputTextValue = $('#inputText').val();
+        var inputTitleValue = inputTitle.val();
+        var inputTextValue = inputText.val();
         var requestUrl = apiRoot;
-
-        console.log(inputTitleValue);
-        console.log(inputTextValue);
 
         $.ajax({
             url: requestUrl,
@@ -22,19 +21,23 @@ $(document).ready(function () {
             dataType: 'json',
             data: JSON.stringify({
                 title: inputTitleValue,
-                text: inputTextValue
+                body: inputTextValue
             }),
-            success: function (response) {
-                if (data.status === 200) {
+            complete: function (response) {
+                if (response.status === 200) {
                     alert('Dane zostały przesłane na serwer.');
                 }
-            },
-            error: function (xhr, status, error) {
-                console.error('Wystąpił błąd podczas przesyłania danych: ' + error);
             }
         });
+        
+        cleanData(inputTitle);
+        cleanData(inputText);
     }
 
     noteForm.on('submit', postData);
-
+    
+    function cleanData(element) {
+        element.val('');
+    }
+    
 });

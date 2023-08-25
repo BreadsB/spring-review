@@ -17,12 +17,12 @@
         <div class="menu-item"><a href="view-messages.html">View messages</a></div>
     </div>
 
-    <form action="api/notes/" method="post" data-note-add-form>
+    <form action="http://localhost:8080/api/notes/" method="POST" data-note-add-form>
         <label for="inputTitle">Title:</label>
         <input id="inputTitle" maxlength="100" name="Title" required="required" type="text" placeholder="Type title" />
         <label for="inputText">Note&#39;s body</label>
         <textarea id="inputText" placeholder="Type your message here" cols="70" name="Notes Body" required="required" rows="10"></textarea>
-        <fieldset style="width: 100%; text-align: center;">
+        <fieldset class="fieldsets">
             <button type="submit" name="sendButton" class="button" id="sendButton">Send data</button>
         </fieldset>
         <button type="reset" name="clearButton" class="button" id="clearButton">Clear fields</button>
