@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Formularz z Ajax</title>
 
@@ -8,30 +9,30 @@
 </head>
 
 <body>
-    <h1>Formularz z Ajax</h1>
-    <h1 style="text-align: center;">View notes</h1>
-    <div class="menu-container">
-        <div class="menu-item"><a href="index.html">Create Message</a></div>
-        <div class="menu-item" style="font-weight: bold;">View messages</div>
-    </div>
-
-    <div class="message__preview">
-        <div class="container1">
-            <p class="desc de_ti">Title:</p>
-            <p class="message title border"></p>
-            <p class="desc">Body:</p>
-            <p class="message messbody border"></p>
+    <section>
+        <h1>Formularz z Ajax</h1>
+        <h1 style="text-align: center;">View notes</h1>
+        <div class="menu-container">
+            <div class="menu-item"><a href="index.html">Create Message</a></div>
+            <div class="menu-item" style="font-weight: bold;">View messages</div>
         </div>
+    </section>
 
-        <div class="container2">
-            <div>
-                <button id="retrieveButton">Retrieve messages from Server</button>
-                <br>Lista wiadomości:
-                <select class="list" messages_list>
-                </select>
-                
-            </div>
+    <section>
+        <form action="http://localhost:8080/api/notes/" method="get" id="getAllMessagesForm">
+            <button name="getAllMessages" data-button-get-all-messages type="button" class="button">Retrieve all messages:</button>
+        </form>
+    </section>
+
+    <div class="message-container">
+        <div class="message-hint">
+            <div class="messageTitleBlock">Title</div>
+            <div class="messageDateBlock">Created date</div>
+            <div class="messageButtonBlock"></div>
         </div>
+        <ul data-messages-list>
+
+        </ul>
     </div>
     <script src="jquery-3.7.0.min.js"></script>
     <script src="view-messages.js"></script>

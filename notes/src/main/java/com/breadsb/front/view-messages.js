@@ -1,34 +1,47 @@
-$(document).ready(function() {
-    var messages_list = $('[messages_list]');
-    var retrieveButton = $('#retrieveButton');
-    var apiRoot = 'http://localhost:8080/api/notes/';
+$(document).ready(function () {
 
-    function getAllMessages() {
-        var requestUrl = apiRoot;
+    var apiRoot = "http://localhost:8080/api/notes/";
+    var getButton = $('[name="getAllMessages"]');
+    var messagesList = $('[data-messages-list]');
 
-        $.ajax({
-            url: requestUrl,
-            method: 'GET',
-            success: function(data) {
-                fillListWithMessages(data);
-            },
-            error: function (xhr, status, error) {
-                console.error(error);
-            }
+    var getMessageBodyButton = $('.getMessageBodyButton').on('click', function () {
+        $('.messageBody').slideToggle("slow");
+    })
+
+    function createMessage(element) {
+        var message = $('<li>').addClass('message');
+        var messageHint = $('<div>').addClass('message-hint');
+        var messageTitle = $('<div>').addClass('messageTitleBlock').text(element.title);
+        var messageDate = $('<div>').addClass('messageDateBlock').text(element.createdAt);
+        var messageButton = $('<div>').addClass('messageButtonBlock');
+        var messageBody = $('<div>').addClass('messageBody').text(element.body);
+        var getBodyButton = $('<button>').addClass('getMessageBodyButton').text('Get Body').on('click', function () {
+            messageBody.slideToggle();
         });
-    };
 
-    function fillListWithMessages(data) {
-        messages_list.empty();
-        $.each(data.messages, function(index, message) {
-            messages_list.append($('<option value="' +
-            message.title + '">' + message.title + '</option>'));
-        });
-    };
+        messageButton.append(getBodyButton);
+        messageHint.append(messageTitle, messageDate, messageButton);
+        message.append(messageHint, messageBody);
 
-    function changeName() {
-        retrieveButton.text("Changed name!");
+        return message;
     }
 
-    retrieveButton.click(getAllMessages);
+    function getMessages(data) {
+        messagesList.empty();
+        data.forEach( function(element) {
+            createMessage(element).appendTo(messagesList);
+        });
+    }
+
+    function getAllMessages(event) {
+        var connectionURL = apiRoot;
+
+        $.ajax({
+            url: connectionURL,
+            method: "GET",
+            success: getMessages
+        });
+    }
+
+    getButton.on("click", getAllMessages);
 });

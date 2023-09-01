@@ -1,16 +1,8 @@
 body {
-    background-color: #f0f0f0;
-    margin: 15px 15px;
-    height: 100%;
+    background-color: #1678;
+    margin: 0;
+    box-sizing: border-box;
 }
-
-div {
-    text-align: center;
-    font-weight: bold;
-
-    padding: 10px;
-}
-
 
 .border {
     border: groove black 1px;
@@ -41,58 +33,57 @@ a:active {
     text-decoration: none;
 }
 
-.message__preview {
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.message-container {
+    margin: 0 auto;
+    width: 80%;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.message-hint {
     display: flex;
-    height: 70vh;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 5px;
 }
 
-.container1 {
-    width: 85%;
+.messageTitleBlock {
+    width: 60%;
+    text-align: center;
+}
+
+.messageDateBlock {
+    width: 30%;
+    text-align: center;
+}
+
+.messageButtonBlock {
+    width: 10%;
+    text-align: center;
+}
+
+.messageBody {
+    min-height: 4vh;
+    max-height: 40vh;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 0 auto;
+    display: none;
+}
+
+.message {
     display: flex;
-    flex-flow: column;
+    flex-direction: column;
 }
 
-.desc {
-    text-align: left;
-    height: auto;
-    margin: 2vh 0px 0.5vh 0px;
-}
-
-.de_ti {
-    margin: 0px 0px 0.5vh 0px;
-}
-
-.title {
-    height: 8%;
-    width: 50%;
-    align-self: left;
-    margin: 0;
-}
-
-.messbody {
-    margin: 0;
-    height: 100%;
-    text-align: justify;
-    text-justify: inter-word;
-}
-
-.container2 {
-    display: flex;
-    flex-flow: column;
-    align-content: center;
-    justify-content: center;
-    width: 15%;
-}
-
-.list {
-    max-width: 300px;
-    height: 50%;
-    width: 70%;
-    margin: 10px auto;
-    display: block;
-}
-
-#retrieveButton {
-    width: 70%;
-    margin: 20px auto;
+.message-descr {
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
 }
