@@ -3,6 +3,7 @@ $(document).ready(function () {
     var apiRoot = "http://localhost:8080/api/notes/";
     var getButton = $('[name="getAllMessages"]');
     var messagesList = $('[data-messages-list]');
+    var itemsPerPage = 10;
 
     var getMessageBodyButton = $('.getMessageBodyButton').on('click', function () {
         $('.messageBody').slideToggle("slow");
@@ -26,9 +27,21 @@ $(document).ready(function () {
         return message;
     }
 
-    function getMessages(data) {
+    function getMessages(messages) {
         messagesList.empty();
-        data.forEach( function(element) {
+        
+        $('#paginationMenu').pagination({
+            dataSource: messages,
+            pageSize: 10,
+            callback: function(data, pagination) {
+                displayData(data);
+            }
+        })
+    }
+    
+    function displayData(data) {
+        messagesList.empty();
+        data.forEach(function (element) {
             createMessage(element).appendTo(messagesList);
         });
     }
@@ -39,7 +52,10 @@ $(document).ready(function () {
         $.ajax({
             url: connectionURL,
             method: "GET",
-            success: getMessages
+            success: getMessages,
+            error: function () {
+                alert("Error fetching data from the server");
+            }
         });
     }
 

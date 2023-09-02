@@ -20,8 +20,9 @@
 
     <section>
         <form action="http://localhost:8080/api/notes/" method="get" id="getAllMessagesForm">
-            <button name="getAllMessages" data-button-get-all-messages type="button" class="button">Retrieve all messages:</button>
+            <button name="getAllMessages" data-button-get-all-messages type="button" class="button">Fetch messages:</button>
         </form>
+        <div id="paginationMenu"></div>
     </section>
 
     <div class="message-container">
@@ -35,5 +36,6 @@
         </ul>
     </div>
     <script src="jquery-3.7.0.min.js"></script>
+    <script src="pagination.js.org_dist_2.6.0_pagination.js"></script>
     <script src="view-messages.js"></script>
 </body></html>

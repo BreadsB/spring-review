@@ -87,3 +87,9 @@ ul {
     border-bottom: 1px solid black;
     margin-bottom: 10px;
 }
+
+.paginationjs-pages > ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
