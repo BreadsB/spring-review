@@ -2,6 +2,7 @@ body {
     background-color: #1678;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .border {
@@ -33,6 +34,13 @@ a:active {
     text-decoration: none;
 }
 
+.button {
+    height: 40px;
+    border-radius: 10px;
+    background-color: lightcyan;
+    font-weight: 800;
+}
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -40,7 +48,8 @@ ul {
 
 .message-container {
     margin: 0 auto;
-    width: 80%;
+        min-width: 800px;
+    max-width: 1100px;
     padding: 15px;
     border: 1px solid black;
     border-radius: 10px;
@@ -51,6 +60,11 @@ ul {
     flex-direction: row;
     justify-content: space-around;
     padding: 5px;
+}
+
+.tablehint {
+    font-weight: bolder;
+    border-bottom: 1px solid black;
 }
 
 .messageTitleBlock {
@@ -91,5 +105,21 @@ ul {
 .paginationjs-pages > ul {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+}
+
+.paginationjs-pages > ul > li > a {
+    border: 1px solid black;
+    padding: 5px;
+    margin: 0 5px;
+    border-radius: 5px;
+    background-color: lightcyan;
+}
+
+#paginationMenu {
+    display: flex;
     justify-content: center;
+    height: 40px;
+    align-items: center;
+    align-content: center;
 }
