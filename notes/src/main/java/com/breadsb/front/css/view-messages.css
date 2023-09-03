@@ -1,37 +1,5 @@
-body {
-    background-color: #1678;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Quicksand', sans-serif;
-}
-
 .border {
     border: groove black 1px;
-}
-
-.menu-container {
-    position: fixed;
-    top: 3rem;
-    right: 3rem;
-    background-color: #444;
-    color: white;
-    padding: 10px;
-    z-index: 1000;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.menu-item {
-    margin: 5px 10px;
-}
-
-a,
-a:hover,
-a:visited,
-a:active {
-    color: inherit;
-    text-decoration: none;
 }
 
 .button {
