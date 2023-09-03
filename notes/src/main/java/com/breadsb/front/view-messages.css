@@ -62,6 +62,10 @@ ul {
     padding: 5px;
 }
 
+#getAllMessagesForm {
+    text-align: center;
+}
+
 .tablehint {
     font-weight: bolder;
     border-bottom: 1px solid black;
@@ -83,13 +87,14 @@ ul {
 }
 
 .messageBody {
-    min-height: 4vh;
-    max-height: 40vh;
+    height: 30vh;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid black;
-    margin: 0 auto;
+    margin: 0 30px;
     display: none;
+    text-align: justify;
+    box-shadow: 10px 10px 10px silver;
 }
 
 .message {
@@ -102,24 +107,43 @@ ul {
     margin-bottom: 10px;
 }
 
-.paginationjs-pages > ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.paginationjs-pages > ul > li > a {
-    border: 1px solid black;
-    padding: 5px;
-    margin: 0 5px;
-    border-radius: 5px;
-    background-color: lightcyan;
-}
-
 #paginationMenu {
     display: flex;
     justify-content: center;
-    height: 40px;
+    height: 54px;
+    width: 400px;
+    margin: 10px auto;
+}
+
+.paginationjs-pages > ul > li {
+    display: inline-flex;
+    justify-content: center;
     align-items: center;
-    align-content: center;
+    width: 30px;
+}
+
+.paginationjs-prev, .paginationjs-next {
+    border: 1px solid black;
+    margin: 0 20px;
+}
+
+.activePage {
+    background-color: rgb(255, 200, 200);
+}
+
+.paginationjs-pages {
+    display: flex;
+}
+
+.hidden {
+/*    display: none;*/
+/*    height: 0;*/
+}
+
+.messagesList {
+/*
+    overflow: hidden;
+    transition: height 1s;
+*/
+    display: none;
 }

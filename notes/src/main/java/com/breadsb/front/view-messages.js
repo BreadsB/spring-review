@@ -4,10 +4,20 @@ $(document).ready(function () {
     var getButton = $('[name="getAllMessages"]');
     var messagesList = $('[data-messages-list]');
     var itemsPerPage = 10;
+    var getBodyText = 'Get body';
 
-    var getMessageBodyButton = $('.getMessageBodyButton').on('click', function () {
-        $('.messageBody').slideToggle("slow");
-    })
+    function getMessageBodyButton(button, message) {
+        var closeBodyText = 'Close body';
+        console.log(button.text());
+        
+        if (button.text() == getBodyText) {
+            button.text(closeBodyText);
+        } else {
+            button.text(getBodyText);
+        }
+
+        message.slideToggle(1000);
+    };
 
     function createMessage(element) {
         var message = $('<li>').addClass('message');
@@ -16,8 +26,8 @@ $(document).ready(function () {
         var messageDate = $('<div>').addClass('messageDateBlock').text(element.createdAt);
         var messageButton = $('<div>').addClass('messageButtonBlock');
         var messageBody = $('<div>').addClass('messageBody').text(element.body);
-        var getBodyButton = $('<button>').addClass('getMessageBodyButton').text('Get Body').on('click', function () {
-            messageBody.slideToggle();
+        var getBodyButton = $('<button>').addClass('getMessageBodyButton').text(getBodyText).on('click', function () {
+            getMessageBodyButton(getBodyButton, messageBody);
         });
 
         messageButton.append(getBodyButton);
@@ -28,22 +38,24 @@ $(document).ready(function () {
     }
 
     function getMessages(messages) {
-        messagesList.empty();
-        
         $('#paginationMenu').pagination({
             dataSource: messages,
             pageSize: 10,
-            callback: function(data, pagination) {
+            callback: function (data, pagination) {
                 displayData(data);
-            }
+            },
+            activeClassName: "activePage"
         })
+        messagesList.removeClass('hidden');
+        messagesList.slideToggle(1000);
     }
-    
+
     function displayData(data) {
         messagesList.empty();
         data.forEach(function (element) {
             createMessage(element).appendTo(messagesList);
         });
+
     }
 
     function getAllMessages(event) {
