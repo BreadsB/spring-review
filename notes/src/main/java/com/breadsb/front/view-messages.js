@@ -6,7 +6,7 @@ $(document).ready(function () {
     var itemsPerPage = 10;
     var getBodyText = 'Get body';
 
-    function getMessageBodyButton(button, message) {
+    function getMessageBodyButton(button, messageBody) {
         var closeBodyText = 'Close body';
         
         if (button.text() == getBodyText) {
@@ -14,8 +14,9 @@ $(document).ready(function () {
         } else {
             button.text(getBodyText);
         }
-
-        message.slideToggle(1000);
+        
+        $('.messageBody').hide();
+        messageBody.slideToggle(1000);
     };
 
     function createMessage(element) {
