@@ -25,4 +25,17 @@ public class GeneralApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(aed, aed.getStatus());
     }
+
+    @ExceptionHandler( {MessageBodyTooLongException.class } )
+    @ResponseBody
+    ResponseEntity<Object> messageBodyTooLongException ( MessageBodyTooLongException e) {
+        ApiErrorDetails errorDetails = new ApiErrorDetails(
+                LocalDateTime.now(),
+                "Message body is too long",
+                HttpStatus.BAD_REQUEST,
+                e.getMessage()
+        );
+
+        return new ResponseEntity<>(errorDetails, errorDetails.getStatus());
+    }
 }

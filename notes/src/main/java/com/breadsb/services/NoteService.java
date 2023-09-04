@@ -1,6 +1,7 @@
 package com.breadsb.services;
 
 import com.breadsb.entities.Note;
+import com.breadsb.exceptions.MessageBodyTooLongException;
 import com.breadsb.exceptions.ResourceNotFoundException;
 import com.breadsb.repositories.NoteRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,13 @@ public class NoteService {
     private final NoteRepository repository;
 
     public void createNote(Note note) {
-        repository.save(note);
+        int length = note.getBody().length();
+        int maxLength = 255;
+        if (length > maxLength) {
+            throw new MessageBodyTooLongException("Message exceeds the maximum allowed length of "+ maxLength +" characters.");
+        } else {
+            repository.save(note);
+        }
     }
 
     public Note getNoteById(Long id) {
