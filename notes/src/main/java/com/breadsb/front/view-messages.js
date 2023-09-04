@@ -8,7 +8,6 @@ $(document).ready(function () {
 
     function getMessageBodyButton(button, message) {
         var closeBodyText = 'Close body';
-        console.log(button.text());
         
         if (button.text() == getBodyText) {
             button.text(closeBodyText);
@@ -25,7 +24,7 @@ $(document).ready(function () {
         var messageTitle = $('<div>').addClass('messageTitleBlock block').text(element.title);
         var messageDate = $('<div>').addClass('messageDateBlock block').text(element.createdAt);
         var messageButton = $('<div>').addClass('messageButtonBlock');
-        var messageBody = $('<div>').addClass('messageBody').text(element.body);
+        var messageBody = $('<div>').addClass('messageBody scrollbar').text(element.body);
         var getBodyButton = $('<button>').addClass('getMessageBodyButton messageButton').text(getBodyText).on('click', function () {
             getMessageBodyButton(getBodyButton, messageBody);
         });

@@ -1,5 +1,5 @@
 body {
-    background-color: #1678;
+    background-color: #C7EFCF;
     margin: 0;
     box-sizing: border-box;
     font-family: 'Quicksand', sans-serif;
@@ -9,10 +9,13 @@ body {
 
 .menu-container {
     position: fixed;
+    color: black;
     top: 3rem;
     right: 3rem;
-    background-color: #444;
-    color: white;
+    font-weight: 800;
+    background-color: #F0B67F;
+/*    color: white;*/
+    border-radius: 8px;
     padding: 10px;
     z-index: 1000;
     display: flex;
@@ -21,7 +24,7 @@ body {
 }
 
 .menu-item.active {
-    font-weight: bolder;
+    font-weight: 1000;
 }
 
 .menu-item {

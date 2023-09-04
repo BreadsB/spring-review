@@ -5,25 +5,20 @@
 .button {
     height: 40px;
     border-radius: 10px;
-    background-color: lightcyan;
+    background-color: rgb(214,209,177);
     font-weight: 800;
-}
-
-.messageButton {
-    font-weight: 500;
-    font-size: 13px;
 }
 
 ul {
     list-style-type: none;
-    padding: 0;
+    padding: 0 10px;
 }
 
 .message-container {
     margin: 0 auto;
-        min-width: 800px;
+    min-width: 800px;
     max-width: 1100px;
-    padding: 15px;
+    padding: 10px;
     border: 1px solid black;
     border-radius: 10px;
 }
@@ -55,7 +50,7 @@ ul {
 
 .messageButtonBlock {
     width: 140px;
-    justify-content: center;
+    justify-content: space-between;
     display: flex;
     flex-direction: row;
 }
@@ -65,10 +60,10 @@ ul {
     padding: 10px;
     border-radius: 10px;
     border: 1px solid black;
-    margin: 0 30px;
+    margin: 0 30px 10px 30px;
     display: none;
     text-align: justify;
-    box-shadow: 10px 10px 10px silver;
+    overflow-y: auto;
 }
 
 .message {
@@ -115,7 +110,7 @@ ul {
 }
 
 .messagesList {
-    height: 530px;
+    height: 580px;
     display: none;
     overflow-y: scroll;
 }
@@ -125,7 +120,49 @@ ul {
     align-items: center;
 }
 
+.hidden {
+    display: none;
+}
+
+.active {
+}
+
 .restButtons {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background: inherit;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background: #D6D1B1;
+    border-radius: 8px;
+}
+
+.scrollbar {
+    padding: 0 20px;
+}
+
+.messageButton {
+    font-weight: 500;
+    font-size: 13px;
+    background: rgb(214,209,177);
+    border: 1px;
+    border-radius: 10px;
+}
+
+.deleteMessageButton {
+    margin-top: 5px;
+    background-color: #EA0000;
+}
+
+.updateMessageButton {
+    background-color: yellow;
 }
