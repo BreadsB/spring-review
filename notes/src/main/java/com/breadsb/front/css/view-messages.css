@@ -9,6 +9,11 @@
     font-weight: 800;
 }
 
+.messageButton {
+    font-weight: 500;
+    font-size: 13px;
+}
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -46,12 +51,13 @@ ul {
 
 .messageDateBlock {
     width: 30%;
-    text-align: center;
 }
 
 .messageButtonBlock {
-    width: 10%;
-    text-align: center;
+    width: 140px;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
 }
 
 .messageBody {
@@ -68,6 +74,7 @@ ul {
 .message {
     display: flex;
     flex-direction: column;
+    border-bottom: 1px solid black;
 }
 
 .message-descr {
@@ -103,15 +110,22 @@ ul {
     display: flex;
 }
 
-.hidden {
-/*    display: none;*/
-/*    height: 0;*/
+.getMessageBodyButton {
+    width: 70px;
 }
 
 .messagesList {
-/*
-    overflow: hidden;
-    transition: height 1s;
-*/
+    height: 530px;
     display: none;
+    overflow-y: scroll;
+}
+
+.block {
+    display: flex;
+    align-items: center;
+}
+
+.restButtons {
+    display: flex;
+    flex-direction: column;
 }

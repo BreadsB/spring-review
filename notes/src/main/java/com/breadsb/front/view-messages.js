@@ -22,15 +22,25 @@ $(document).ready(function () {
     function createMessage(element) {
         var message = $('<li>').addClass('message');
         var messageHint = $('<div>').addClass('message-hint');
-        var messageTitle = $('<div>').addClass('messageTitleBlock').text(element.title);
-        var messageDate = $('<div>').addClass('messageDateBlock').text(element.createdAt);
+        var messageTitle = $('<div>').addClass('messageTitleBlock block').text(element.title);
+        var messageDate = $('<div>').addClass('messageDateBlock block').text(element.createdAt);
         var messageButton = $('<div>').addClass('messageButtonBlock');
         var messageBody = $('<div>').addClass('messageBody').text(element.body);
-        var getBodyButton = $('<button>').addClass('getMessageBodyButton').text(getBodyText).on('click', function () {
+        var getBodyButton = $('<button>').addClass('getMessageBodyButton messageButton').text(getBodyText).on('click', function () {
             getMessageBodyButton(getBodyButton, messageBody);
         });
-
+        var updateMessageButton = $('<button>').addClass('updateMessageButton messageButton').text('Update').on('click', function() {
+            updateMessage(updateMessageButton);
+        });
+        var deleteMessageButton = $('<button>').addClass('deleteMessageButton messageButton').text('Delete').on('click', function() {
+            deleteMessage;
+        })
+        
         messageButton.append(getBodyButton);
+        var buttonsBlock = $('<div>').addClass('restButtons');
+        buttonsBlock.append(updateMessageButton);
+        buttonsBlock.append(deleteMessageButton);
+        messageButton.append(buttonsBlock)
         messageHint.append(messageTitle, messageDate, messageButton);
         message.append(messageHint, messageBody);
 
