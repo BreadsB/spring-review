@@ -43,6 +43,6 @@ public class NoteService {
         repoNote.setTitle(note.getTitle());
         repoNote.setBody(note.getBody());
         repoNote.setModifiedAt(LocalDateTime.now());
-        repository.save(note);
+        repository.save(repoNote);
     }
 }

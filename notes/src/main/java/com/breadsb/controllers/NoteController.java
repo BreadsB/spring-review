@@ -34,11 +34,11 @@ public class NoteController {
         return ResponseEntity.ok(service.getAllNotes());
     }
 
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Note> put(@PathVariable Long id, @RequestBody Note note) {
         service.updateNote(id, note);
-        String resourceURI = "/api/notes/" + id;
-        return ResponseEntity.created(URI.create(resourceURI)).build();
+        String uri = "http://localhost:8080/api/notes/" + id;
+        return ResponseEntity.created(URI.create(uri)).build();
     }
 
     @DeleteMapping("{id}")

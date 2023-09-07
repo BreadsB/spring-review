@@ -74,6 +74,8 @@ $(document).ready(function () {
         var bodyText = body.text();
         var messageId = id;
 
+        console.log(connectionURL + messageId);
+
         var titleInput = $('<input>').addClass('titleInputBlock block ').val(titleText);
         title.text('');
         title.append(titleInput);
@@ -88,25 +90,22 @@ $(document).ready(function () {
             var newTitle = titleInput.val();
             var newBody = bodyInput.val();
 
-            var note = {
-                title: newTitle,
-                body: newBody
-            }
-
             $.ajax({
                 url: connectionURL + messageId,
-                method: "PUT",
+                method: 'PUT',
                 processData: false,
                 contentType: "application/json; charset=utf-8",
-                dataType: 'json',
-                data: JSON.stringify(note),
+                data: JSON.stringify({
+                    "title": newTitle,
+                    "body": newBody
+                }),
                 success: function (response) {
-                    alert("Hurray! Done!");
                     replaceInputWithText(titleInput, bodyInput, title, body);
                     afterUpdate(button);
                 },
-                error: function () {
-                    alert("Error updating note");
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error at updating: " + textStatus + ", " + errorThrown);
+                    console.log("Response Text:", xhr.responseText);
                 }
             });
         })
@@ -132,6 +131,7 @@ $(document).ready(function () {
         $.ajax({
             url: connectionURL,
             method: "GET",
+            dataType: 'json',
             success: getMessages,
             error: function () {
                 alert("Error fetching data from the server");
