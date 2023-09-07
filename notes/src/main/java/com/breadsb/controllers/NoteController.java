@@ -7,10 +7,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/notes/")
+@RequestMapping("/api/notes/")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class NoteController {
@@ -36,7 +37,8 @@ public class NoteController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Note> put(@PathVariable Long id, @RequestBody Note note) {
         service.updateNote(id, note);
-        return ResponseEntity.created();
+        String resourceURI = "/api/notes/" + id;
+        return ResponseEntity.created(URI.create(resourceURI)).build();
     }
 
     @DeleteMapping("{id}")

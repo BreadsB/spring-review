@@ -56,7 +56,7 @@ $(document).ready(function () {
             activeClassName: "activePage"
         })
         messagesList.removeClass('hidden');
-        messagesList.slideToggle(1000);
+        messagesList.slideDown(1000);
     }
 
     function displayData(data) {
@@ -85,10 +85,9 @@ $(document).ready(function () {
         body.addClass('white');
 
         button.on('click', function () {
-
             var newTitle = titleInput.val();
             var newBody = bodyInput.val();
-            
+
             var note = {
                 title: newTitle,
                 body: newBody
@@ -101,9 +100,10 @@ $(document).ready(function () {
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 data: JSON.stringify(note),
-                success: function(response) {
+                success: function (response) {
                     alert("Hurray! Done!");
-                    afterUpdate(button, titleInput, bodyInput);
+                    replaceInputWithText(titleInput, bodyInput, title, body);
+                    afterUpdate(button);
                 },
                 error: function () {
                     alert("Error updating note");
@@ -112,10 +112,18 @@ $(document).ready(function () {
         })
     }
 
-    function afterUpdate(button, tInput, bInput) {
+    function afterUpdate(button) {
         button.on('click', updateMessage);
-        tInput.delete;
-        bInput.delete;
+        getAllMessages();
+    }
+
+    function replaceInputWithText(titleInput, bodyInput, title, body) {
+        title.text(titleInput.val());
+        body.text(bodyInput.val());
+        titleInput.remove();
+        bodyInput.remove();
+        title.removeClass('white');
+        body.removeClass('white');
     }
 
     function getAllMessages(event) {
