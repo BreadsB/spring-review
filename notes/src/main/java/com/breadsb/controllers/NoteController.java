@@ -33,10 +33,10 @@ public class NoteController {
         return ResponseEntity.ok(service.getAllNotes());
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Note> put(@PathVariable Long id, @RequestBody Note note) {
         service.updateNote(id, note);
-        return ResponseEntity.ok(note);
+        return ResponseEntity.created();
     }
 
     @DeleteMapping("{id}")

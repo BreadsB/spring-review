@@ -12,7 +12,7 @@ $(document).ready(function () {
         var inputTitleValue = inputTitle.val();
         var inputTextValue = inputText.val();
         var requestUrl = apiRoot;
-
+        
         $.ajax({
             url: requestUrl,
             method: 'POST',
@@ -27,6 +27,9 @@ $(document).ready(function () {
                 if (response.status === 200) {
                     alert('Dane zostały przesłane na serwer.');
                 }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                alert('Error occured' + textStatus);
             }
         });
         

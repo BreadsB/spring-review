@@ -5,8 +5,12 @@
 .button {
     height: 40px;
     border-radius: 10px;
-    background-color: rgb(214,209,177);
+    background-color: rgb(214, 209, 177);
     font-weight: 800;
+}
+
+input {
+    font: inherit;
 }
 
 ul {
@@ -42,6 +46,13 @@ ul {
 .messageTitleBlock {
     width: 60%;
     text-align: center;
+    border-radius: 5px;
+    margin: 0 10px 0 0;
+}
+
+.inactive {
+    background: inherit;
+    border: none;
 }
 
 .messageDateBlock {
@@ -64,6 +75,7 @@ ul {
     display: none;
     text-align: justify;
     overflow-y: auto;
+    align-items: stretch;
 }
 
 .message {
@@ -92,7 +104,8 @@ ul {
     width: 30px;
 }
 
-.paginationjs-prev, .paginationjs-next {
+.paginationjs-prev,
+.paginationjs-next {
     border: 1px solid black;
     margin: 0 20px;
 }
@@ -103,10 +116,6 @@ ul {
 
 .paginationjs-pages {
     display: flex;
-}
-
-.getMessageBodyButton {
-    width: 70px;
 }
 
 .messagesList {
@@ -124,8 +133,7 @@ ul {
     display: none;
 }
 
-.active {
-}
+.active {}
 
 .restButtons {
     display: flex;
@@ -153,16 +161,58 @@ ul {
 .messageButton {
     font-weight: 500;
     font-size: 13px;
-    background: rgb(214,209,177);
-    border: 1px;
-    border-radius: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.getMessageBodyButton {
+    width: 70px;
+    background-color: #3498db;
+    color: #fff;
+}
+
+.getMessageBodyButton:hover {
+    background-color: #2980b9;
 }
 
 .deleteMessageButton {
     margin-top: 5px;
-    background-color: #EA0000;
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.deleteMessageButton {
+    background-color: #d52c1e;
 }
 
 .updateMessageButton {
-    background-color: yellow;
+    background-color: #27ae60;
+    color: #fff;
+}
+
+.updateMessageButton:hover {
+    background-color: #219d55;
+}
+
+.titleInputBlock {
+    background-color: inherit;
+    border: none;
+    width: 100%;
+}
+
+.bodyInputBlock {
+    background-color: inherit;
+    border: none;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    resize: none;
+}
+
+.white {
+    background: white;
 }
