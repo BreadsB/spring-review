@@ -32,7 +32,7 @@ $(document).ready(function () {
             updateMessage(updateMessageButton, messageTitle, messageBody, element.id);
         });
         var deleteMessageButton = $('<button>').addClass('deleteMessageButton messageButton').text('Delete').on('click', function () {
-            deleteMessage;
+            confirmDelete(message, element.id);
         })
 
         messageButton.append(getBodyButton);
@@ -73,8 +73,6 @@ $(document).ready(function () {
         var titleText = title.text();
         var bodyText = body.text();
         var messageId = id;
-
-        console.log(connectionURL + messageId);
 
         var titleInput = $('<input>').addClass('titleInputBlock block ').val(titleText);
         title.text('');
@@ -125,6 +123,41 @@ $(document).ready(function () {
         body.removeClass('white');
     }
 
+    function confirmDelete(message, messageId) {
+        var connectionURL = apiRoot;
+        var deleteText = "Are you sure you want to delete message?";
+        $('<div></div>').appendTo('body')
+            .html('<div><h6>' + deleteText + "</h6></div>")
+            .dialog({
+                modal: true,
+                title: 'Delete message',
+                zIndex: 1000,
+                autoOpen: true,
+                width: 'auto',
+                resizable: false,
+                buttons: {
+                    Yes: function () {
+                        $.ajax({
+                            url: connectionURL + messageId,
+                            method: 'DELETE',
+                            success: function () {
+                                console.log("Message has been deleted");
+                                message.remove();
+                                getAllMessages();
+                            },
+                            error: function () {
+                                console.log("error at deleting");
+                            }
+                        });
+                        $(this).dialog("close");
+                    },
+                    No: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+    }
+
     function getAllMessages(event) {
         var connectionURL = apiRoot;
 
@@ -134,7 +167,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: getMessages,
             error: function () {
-                alert("Error fetching data from the server");
+                console.log("Error fetching data from the server");
             }
         });
     }

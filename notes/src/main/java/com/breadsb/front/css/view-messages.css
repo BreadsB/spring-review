@@ -56,7 +56,8 @@ ul {
 }
 
 .messageDateBlock {
-    width: 30%;
+    width: 20%;
+    text-align: center;
 }
 
 .messageButtonBlock {
