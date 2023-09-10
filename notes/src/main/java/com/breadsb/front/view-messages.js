@@ -23,9 +23,20 @@ $(document).ready(function () {
         var message = $('<li>').addClass('message');
         var messageHint = $('<div>').addClass('message-hint');
         var messageTitle = $('<div>').addClass('messageTitleBlock block').text(element.title);
-        
-        var dateConverted = new Date(element.createdAt, "hh/mm/ss dd/mm/yyyy");
-        var messageDate = $('<div>').addClass('messageDateBlock block').text(element.createdAt);
+
+        var dc = new Date(element.createdAt);
+        var messageDate = $('<div>')
+            .addClass('messageDateBlock block')
+            .text(
+                dc.getHours() + ":" +
+                dc.getMinutes() + ":" +
+                dc.getSeconds() + "." +
+                dc.getMilliseconds() + "  " +
+                dc.getDate() + "/" +
+                (dc.getMonth() + 1) + "/" +
+                dc.getFullYear()
+            );
+
         var messageButton = $('<div>').addClass('messageButtonBlock');
         var messageBody = $('<div>').addClass('messageBody scrollbar').text(element.body);
         var getBodyButton = $('<button>').addClass('getMessageBodyButton messageButton').text(getBodyText).on('click', function () {
@@ -68,7 +79,7 @@ $(document).ready(function () {
         data.forEach(function (element) {
             createMessage(element).appendTo(messagesList);
         });
-        
+
     }
 
     function updateMessage(button, title, body, id) {
@@ -206,7 +217,7 @@ $(document).ready(function () {
                     break;
             }
         });
-        
+
         $.each(listItems, function (i, li) {
             messagesList.append(li);
         });
