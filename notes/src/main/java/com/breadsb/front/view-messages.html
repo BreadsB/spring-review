@@ -35,18 +35,16 @@
         <div class="message-hint tablehint">
             <div class="messageTitleBlock">Title</div>
             <div class="messageDateBlock">Created date</div>
-            <div>
-<!--                <select class="hidden">-->
-                <select>
-                <option id="sortDateUp">Sort by created date ascending</option>
-                <option id="sortDateDown">Sort by created date descending</option>
-                <option id="sortTitleUp">Sort by title A-Z</option>
-                <option id="sortTitleDown">Sort by title Z-A</option>
+            <div class="sortingBlock">
+                <select _sortingBlock class="hidden">
+                <option value="sortDateUp">Sort by created date ascending</option>
+                <option value="sortDateDown">Sort by created date descending</option>
+                <option value="sortTitleUp">Sort by title A-Z</option>
+                <option value="sortTitleDown">Sort by title Z-A</option>
                 </select>
             </div>
         </div>
         <ul data-messages-list class="messagesList scrollbar">
-
         </ul>
     </div>
     <script src="jquery-3.7.0.min.js"></script>

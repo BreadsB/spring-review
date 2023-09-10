@@ -18,18 +18,19 @@ $(document).ready(function () {
             method: 'POST',
             processData: false,
             contentType: "application/json; charset=utf-8",
-            dataType: 'json',
+//            dataType: 'json',
             data: JSON.stringify({
                 title: inputTitleValue,
                 body: inputTextValue
             }),
-            complete: function (response) {
+            success: function (response) {
+                console.log(response.status);
                 if (response.status === 200) {
-                    alert('Dane zostały przesłane na serwer.');
+                    console.log('Dane zostały przesłane na serwer.');
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
-                alert('Error occured' + textStatus);
+                console.log('Error occured' + textStatus);
             }
         });
         

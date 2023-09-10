@@ -34,6 +34,34 @@ ul {
     padding: 5px;
 }
 
+.messageTitleBlock {
+    flex: 3;
+/*    width: 60%;*/
+    text-align: center;
+    border-radius: 5px;
+    margin: 0 10px 0 0;
+}
+
+.messageDateBlock {
+    flex: 1;
+/*    width: 20%;*/
+    text-align: center;
+}
+
+.messageButtonBlock {
+    width: 140px;
+    margin-left: 50px;
+/*    flex: 1 1 0;*/
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+}
+
+.sortingBlock {
+    width: 140px;
+    margin-right: 60px
+}
+
 #getAllMessagesForm {
     text-align: center;
 }
@@ -41,30 +69,12 @@ ul {
 .tablehint {
     font-weight: bolder;
     border-bottom: 1px solid black;
-}
-
-.messageTitleBlock {
-    width: 60%;
-    text-align: center;
-    border-radius: 5px;
-    margin: 0 10px 0 0;
+    margin: 0 15px;
 }
 
 .inactive {
     background: inherit;
     border: none;
-}
-
-.messageDateBlock {
-    width: 20%;
-    text-align: center;
-}
-
-.messageButtonBlock {
-    width: 140px;
-    justify-content: space-between;
-    display: flex;
-    flex-direction: row;
 }
 
 .messageBody {
@@ -120,9 +130,9 @@ ul {
 }
 
 .messagesList {
-    height: 580px;
+    height: 500px;
     display: none;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .block {
@@ -133,8 +143,6 @@ ul {
 .hidden {
     display: none;
 }
-
-.active {}
 
 .restButtons {
     display: flex;
@@ -157,6 +165,7 @@ ul {
 
 .scrollbar {
     padding: 0 20px;
+/*    margin-right: 50px;*/
 }
 
 .messageButton {

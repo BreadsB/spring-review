@@ -5,6 +5,7 @@ $(document).ready(function () {
     var messagesList = $('[data-messages-list]');
     var itemsPerPage = 10;
     var getBodyText = 'Get body';
+    var sortingBlock = $('[_sortingBlock]');
 
     function getMessageBodyButton(button, messageBody) {
         var closeBodyText = 'Close body';
@@ -22,6 +23,8 @@ $(document).ready(function () {
         var message = $('<li>').addClass('message');
         var messageHint = $('<div>').addClass('message-hint');
         var messageTitle = $('<div>').addClass('messageTitleBlock block').text(element.title);
+        
+        var dateConverted = new Date(element.createdAt, "hh/mm/ss dd/mm/yyyy");
         var messageDate = $('<div>').addClass('messageDateBlock block').text(element.createdAt);
         var messageButton = $('<div>').addClass('messageButtonBlock');
         var messageBody = $('<div>').addClass('messageBody scrollbar').text(element.body);
@@ -56,6 +59,7 @@ $(document).ready(function () {
             activeClassName: "activePage"
         })
         messagesList.removeClass('hidden');
+        sortingBlock.removeClass('hidden');
         messagesList.slideDown(1000);
     }
 
@@ -64,6 +68,7 @@ $(document).ready(function () {
         data.forEach(function (element) {
             createMessage(element).appendTo(messagesList);
         });
+        
     }
 
     function updateMessage(button, title, body, id) {
@@ -159,10 +164,10 @@ $(document).ready(function () {
     }
 
     function getAllMessages(event) {
-        var connectionURL = apiRoot;
+        var connectionUrl = apiRoot;
 
         $.ajax({
-            url: connectionURL,
+            url: connectionUrl,
             method: "GET",
             dataType: 'json',
             success: getMessages,
@@ -171,6 +176,41 @@ $(document).ready(function () {
             }
         });
     }
+
+    sortingBlock.change(function () {
+        var selectedOption = $(this).val();
+        var listItems = messagesList.children("li").get();
+
+        listItems.sort(function (a, b) {
+            var aTitle = $(a).find(".messageTitleBlock").text();
+            var bTitle = $(b).find(".messageTitleBlock").text();
+            var aDate = $(a).find(".messageDateBlock").text();
+            var bDate = $(b).find(".messageDateBlock").text();
+
+            switch (selectedOption) {
+                case 'sortDateUp':
+                    return aDate.localeCompare(bDate);
+                    console.log("dateUp");
+                    break;
+                case 'sortDateDown':
+                    return bDate.localeCompare(aDate);
+                    console.log("dateDown");
+                    break;
+                case 'sortTitleUp':
+                    console.log("titleUp");
+                    return aTitle.localeCompare(bTitle);
+                    break;
+                case 'sortTitleDown':
+                    console.log("titleDown");
+                    return bTitle.localeCompare(aTitle);
+                    break;
+            }
+        });
+        
+        $.each(listItems, function (i, li) {
+            messagesList.append(li);
+        });
+    });
 
     getButton.on("click", getAllMessages);
 });
