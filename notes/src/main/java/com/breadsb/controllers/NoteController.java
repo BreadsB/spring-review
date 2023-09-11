@@ -3,11 +3,13 @@ package com.breadsb.controllers;
 import com.breadsb.entities.Note;
 import com.breadsb.services.NoteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -45,5 +47,10 @@ public class NoteController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.deleteNoteById(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/by-date/")
+    public ResponseEntity<List<Note>> getNotesByDate(@RequestParam("timestamp") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime timestamp) {
+        return ResponseEntity.ok(service.findByCreatedAt(timestamp));
     }
 }

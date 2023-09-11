@@ -45,4 +45,8 @@ public class NoteService {
         repoNote.setModifiedAt(LocalDateTime.now());
         repository.save(repoNote);
     }
+
+    public List<Note> findByCreatedAt(LocalDateTime timestamp) {
+        return repository.findByCreatedAt(timestamp);
+    }
 }
