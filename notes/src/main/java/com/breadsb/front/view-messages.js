@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    var htmlBody = $('body');
     var apiRoot = "http://localhost:8080/api/notes/";
     var getButton = $('[name="getAllMessages"]');
     var messagesList = $('[data-messages-list]');
@@ -83,7 +84,7 @@ $(document).ready(function () {
         data.forEach(function (element) {
             createMessage(element).appendTo(messagesList);
         });
-
+        sortMessageList();
     }
 
     function updateMessage(button, title, body, id) {
@@ -131,7 +132,8 @@ $(document).ready(function () {
 
     function afterUpdate(button) {
         button.on('click', updateMessage);
-        getAllMessages();
+        showAlert("UPDATED", "Message has been updated", getAllMessages);
+        sortMessageList();
     }
 
     function replaceInputWithText(titleInput, bodyInput, title, body) {
@@ -247,30 +249,53 @@ $(document).ready(function () {
         }
     });
 
-    filterButton.on("click", function () {
-        var pickedDate = datePicker.val();
-
-        if (pickedDate !== "") {
-            // Format the pickedDate in the required format
-            var formattedDate = pickedDate + "T00:00:00";
-            var connectionURL = apiRoot + "by-date/";
-
-            // Construct the query parameter string
-            var queryString = "timestamp=" + formattedDate;
-            // Append it to the URL
-            connectionURL += "?" + queryString;
-
-            $.ajax({
-                url: connectionURL,
-                method: "GET",
-                contentType: "application/json", // Set the content type
-                success: function (response) {
-                    console.log("done");
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log("Error");
+    function showAlert(messageTitle, alertMessage, functionToRun) {
+        $('<div></div>').appendTo('body')
+            .html('<div><h6>' + alertMessage + "</h6></div>")
+            .dialog({
+                modal: true,
+                title: messageTitle,
+                zIndex: 1000,
+                autoOpen: true,
+                width: 'auto',
+                resizable: false,
+                buttons: {
+                    Confirm: function () {
+                        functionToRun();
+                        $(this).dialog("close");
+                    }
                 }
             });
-        }
-    });
+    }
+
+    function sortMessageList() {
+        var actualSelectedOption = sortingBlock.val();
+        var listItems = messagesList.children("li").get();
+
+        listItems.sort(function (a, b) {
+            var aTitle = $(a).find(".messageTitleBlock").text();
+            var bTitle = $(b).find(".messageTitleBlock").text();
+            var aDate = $(a).find(".messageDateBlock").text();
+            var bDate = $(b).find(".messageDateBlock").text();
+
+            switch (actualSelectedOption) {
+                case 'sortDateUp':
+                    return aDate.localeCompare(bDate);
+                    break;
+                case 'sortDateDown':
+                    return bDate.localeCompare(aDate);
+                    break;
+                case 'sortTitleUp':
+                    return aTitle.localeCompare(bTitle);
+                    break;
+                case 'sortTitleDown':
+                    return bTitle.localeCompare(aTitle);
+                    break;
+            }
+        });
+
+        $.each(listItems, function (i, li) {
+            messagesList.append(li);
+        });
+    }
 });
