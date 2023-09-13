@@ -227,19 +227,50 @@ $(document).ready(function () {
 
     filterButton.on("click", function () {
         var pickedDate = datePicker.val();
-        
+        var connectionURL = apiRoot + "by-date/";
+
         if (pickedDate !== "") {
-            var queryString = "timestamp="+pickedDate+"T00:00:00";
-            var connectionURL = apiRoot + "by-date/" + "?" + queryString;
+            var requestData = {
+                timestamp: pickedDate + "T00:00:00"
+            }
+
             $.ajax({
                 url: connectionURL,
                 method: "GET",
                 contentType: "application/json",
+                data: requestData,
                 success: getMessages,
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("Error");
                 }
             })
+        }
+    });
+
+    filterButton.on("click", function () {
+        var pickedDate = datePicker.val();
+
+        if (pickedDate !== "") {
+            // Format the pickedDate in the required format
+            var formattedDate = pickedDate + "T00:00:00";
+            var connectionURL = apiRoot + "by-date/";
+
+            // Construct the query parameter string
+            var queryString = "timestamp=" + formattedDate;
+            // Append it to the URL
+            connectionURL += "?" + queryString;
+
+            $.ajax({
+                url: connectionURL,
+                method: "GET",
+                contentType: "application/json", // Set the content type
+                success: function (response) {
+                    console.log("done");
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error");
+                }
+            });
         }
     });
 });
