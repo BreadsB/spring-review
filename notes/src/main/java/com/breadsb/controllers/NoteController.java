@@ -52,8 +52,8 @@ public class NoteController {
 //    Example of usage:
 //    http://localhost:8080/api/notes/by-date/?timestamp=2023-09-11T00:00:00
 //    Above will return list of notes that has been created at the 2023-09-11 (11th September)
-    @GetMapping("/by-date/")
-    public ResponseEntity<List<Note>> getNotesByDate(@RequestParam("timestamp") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime timestamp) {
-        return ResponseEntity.ok(service.findByCreatedAt(timestamp));
+    @GetMapping(value = "by-date/", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Note>> getNotesByDate(@RequestParam("timestamp") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime localDate) {
+        return ResponseEntity.ok(service.findByCreatedAt(localDate));
     }
 }

@@ -6,6 +6,8 @@ $(document).ready(function () {
     var itemsPerPage = 10;
     var getBodyText = 'Get body';
     var sortingBlock = $('[_sortingBlock]');
+    var datePicker = $('[_datePicker]');
+    var filterButton = $('[_dateFilter]');
 
     function getMessageBodyButton(button, messageBody) {
         var closeBodyText = 'Close body';
@@ -71,6 +73,8 @@ $(document).ready(function () {
         })
         messagesList.removeClass('hidden');
         sortingBlock.removeClass('hidden');
+        datePicker.removeClass('hidden');
+        filterButton.removeClass('hidden');
         messagesList.slideDown(1000);
     }
 
@@ -201,18 +205,14 @@ $(document).ready(function () {
             switch (selectedOption) {
                 case 'sortDateUp':
                     return aDate.localeCompare(bDate);
-                    console.log("dateUp");
                     break;
                 case 'sortDateDown':
                     return bDate.localeCompare(aDate);
-                    console.log("dateDown");
                     break;
                 case 'sortTitleUp':
-                    console.log("titleUp");
                     return aTitle.localeCompare(bTitle);
                     break;
                 case 'sortTitleDown':
-                    console.log("titleDown");
                     return bTitle.localeCompare(aTitle);
                     break;
             }
@@ -224,4 +224,22 @@ $(document).ready(function () {
     });
 
     getButton.on("click", getAllMessages);
+
+    filterButton.on("click", function () {
+        var pickedDate = datePicker.val();
+        
+        if (pickedDate !== "") {
+            var queryString = "timestamp="+pickedDate+"T00:00:00";
+            var connectionURL = apiRoot + "by-date/" + "?" + queryString;
+            $.ajax({
+                url: connectionURL,
+                method: "GET",
+                contentType: "application/json",
+                success: getMessages,
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error");
+                }
+            })
+        }
+    });
 });
