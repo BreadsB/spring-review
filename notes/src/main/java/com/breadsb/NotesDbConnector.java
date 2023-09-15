@@ -10,11 +10,13 @@ public enum NotesDbConnector {
     INSTANCE;
     private Connection connection;
     private final String URL = "jdbc:postgresql://localhost:5432/notes";
+    private final String username = System.getenv("postgres-username");
+    private final String password = System.getenv("postgres-pass");
 
     NotesDbConnector() {
         Properties properties = new Properties();
-        properties.put("user", "postgres");
-        properties.put("password", "karpik199");
+        properties.put("user", username);
+        properties.put("password", password);
         properties.put("ssl", "false");
         try {
             connection = DriverManager.getConnection(URL, properties);
