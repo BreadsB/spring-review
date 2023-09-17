@@ -38,12 +38,13 @@ public class NoteService {
         repository.deleteById(id);
     }
 
-    public void updateNote(Long id, Note note) {
+    public Note updateNote(Long id, Note note) {
         Note repoNote = getNoteById(id);
         repoNote.setTitle(note.getTitle());
         repoNote.setBody(note.getBody());
         repoNote.setModifiedAt(LocalDateTime.now());
         repository.save(repoNote);
+        return repoNote;
     }
 
     public List<Note> findByCreatedAt(LocalDateTime timestamp) {

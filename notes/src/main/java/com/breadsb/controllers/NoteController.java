@@ -28,7 +28,8 @@ public class NoteController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> post(@RequestBody Note note) {
         service.createNote(note);
-        return ResponseEntity.ok().build();
+        String uri = "http://localhost:8080/api/notes/" + note.getId();
+        return ResponseEntity.created(URI.create(uri)).build();
     }
 
     @GetMapping
