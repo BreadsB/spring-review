@@ -2,6 +2,7 @@ package com.breadsb.controllers;
 
 import com.breadsb.entities.Note;
 import com.breadsb.services.NoteService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -26,7 +27,7 @@ public class NoteController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> post(@RequestBody Note note) {
+    public ResponseEntity<Void> post(@Valid @RequestBody Note note) {
         service.createNote(note);
         String uri = "http://localhost:8080/api/notes/" + note.getId();
         return ResponseEntity.created(URI.create(uri)).build();
@@ -38,7 +39,7 @@ public class NoteController {
     }
 
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Note> put(@PathVariable Long id, @RequestBody Note note) {
+    public ResponseEntity<Note> put(@PathVariable Long id, @Valid @RequestBody Note note) {
         service.updateNote(id, note);
         String uri = "http://localhost:8080/api/notes/" + id;
         return ResponseEntity.created(URI.create(uri)).build();

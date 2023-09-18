@@ -3,6 +3,8 @@ package com.breadsb.controllers;
 import com.breadsb.entities.Note;
 import com.breadsb.exceptions.ResourceNotFoundException;
 import com.breadsb.services.NoteService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,16 +16,20 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(NoteController.class)
 @WithMockUser
@@ -70,19 +76,59 @@ class NoteControllerTest {
 
     @Test
     void testUpdateNote() throws Exception {
+        Mockito.when(service.updateNote(anyLong(), any(Note.class))).thenReturn(note);
 
-        long id = 1L;
-        String note = "{\"id\": " + id +
-                ", \"title\": \"sometitle\", \"body\": \"somebody\"}";
-        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.put("/api/notes/" + id)
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        Note note2 = new Note("title2", "body2");
+
+        String noteToJson = objectMapper.writeValueAsString(note2);
+
+//        String noteString = "{\"title\": \"sometitle\", \"body\": \"somebody\"}";
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.put("/api/notes/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(noteToJson);
+
+        this.mvc.perform(builder)
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    void testPostNewNote() throws Exception {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        Note note2 = new Note("title2", "body2");
+
+        String noteToJson = objectMapper.writeValueAsString(note2);
+
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post("/api/notes/")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
-                .content(note);
-
-        MvcResult result = this.mvc.perform(builder)
+                .content(noteToJson);
+        this.mvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andDo(MockMvcResultHandlers.print())
-                .andReturn();
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    void deleteNote() throws Exception {
+        Mockito.doNothing().when(service).deleteNoteById(1L);
+        this.mvc.perform(MockMvcRequestBuilders.delete("/api/notes/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void testGetAllNotes() throws Exception {
+        List<Note> list = new ArrayList<>();
+        list.add(new Note());
+        Mockito.when(service.getAllNotes()).thenReturn(list);
+
+        this.mvc.perform(MockMvcRequestBuilders.get("/api/notes/"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }
