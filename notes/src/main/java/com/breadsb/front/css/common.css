@@ -1,8 +1,10 @@
 body {
-    background-color: #C7EFCF;
     margin: 0;
     box-sizing: border-box;
     font-family: 'Quicksand', sans-serif;
+    background-image: linear-gradient(to bottom right, #FD8451, #FFBD6F);
+    min-height: 100vh;
+    overflow-y: hidden;
 }
 
 .menu-container {
@@ -11,8 +13,7 @@ body {
     top: 3rem;
     right: 3rem;
     font-weight: 800;
-    background-color: #F0B67F;
-/*    color: white;*/
+    background-color: #f0e17f;
     border-radius: 8px;
     padding: 10px;
     z-index: 1000;

@@ -9,6 +9,14 @@ $(document).ready(function () {
     var sortingBlock = $('[_sortingBlock]');
     var datePicker = $('[_datePicker]');
     var filterButton = $('[_dateFilter]');
+    var createMessageButton = $('#createMessageButton');
+    var cancelCreationButton = $('#cancelButton');
+    var clearButton = $('#clearButton');
+    var sendButton = $('#sendButton');
+    var noteForm = $('[data-note-add-form]');
+    var modal = $('.modal');
+    var inputTitle = $('#inputTitle');
+    var inputText = $('#inputText');
 
     function getMessageBodyButton(button, messageBody) {
         var closeBodyText = 'Close body';
@@ -21,6 +29,61 @@ $(document).ready(function () {
 
         messageBody.slideToggle(1000);
     };
+
+    createMessageButton.on('click', function () {
+        modal.show();
+    });
+
+    cancelCreationButton.on('click', function () {
+        modal.hide();
+    })
+
+    function postData(event) {
+        event.preventDefault();
+
+        var inputTitleValue = $('#inputTitle').val();
+        var inputTextValue = $('#inputText').val();
+        var requestUrl = apiRoot;
+
+        var noteData = {
+            title: inputTitleValue,
+            body: inputTextValue
+        };
+        
+        $.ajax({
+            url: requestUrl,
+            method: 'POST',
+            processData: false,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(noteData),
+            success: function (response) {
+                if (response.status === 201) {
+                    console.log('Dane zostały przesłane na serwer.');
+                    showConfirm();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log('Error occured' + textStatus);
+                console.log('xhr: ' + xhr);
+                console.log('Error: ' + errorThrown);
+            },
+            complete: function () {
+                modal.hide();
+                getAllMessages();
+                showConfirm();
+            }
+        });
+
+        cleanData(inputTitle);
+        cleanData(inputText);
+
+    }
+
+    function cleanData(element) {
+        element.val('');
+    }
+
+    noteForm.on('submit', postData);
 
     function createMessage(element) {
         var message = $('<li>').addClass('message');
@@ -297,5 +360,14 @@ $(document).ready(function () {
         $.each(listItems, function (i, li) {
             messagesList.append(li);
         });
+    }
+
+    function showConfirm() {
+        var confirmDiv = $('<div>').attr('id','toast').addClass('show').addClass('success').text("Success");
+        htmlBody.append(confirmDiv);
+
+        setTimeout(function () {
+            confirmDiv.toggleClass('show');
+        }, 3000);
     }
 });
