@@ -17,23 +17,19 @@
 <body>
     <h1 style="text-align: center;">Create note</h1>
     <div class="menu-container">
-        <div class="menu-item active">Create Message</div>
-        <div class="menu-item"><a href="view-messages.html">View messages</a></div>
+        <div class="menu-item"><a href="view-messages.html">Create Message</a></div>
+        <div class="menu-item active">View messages</div>
     </div>
-
-    <form action="http://localhost:8080/api/notes/" method="POST" data-note-add-form>
-        <label for="inputTitle">Title:</label>
-        <input id="inputTitle" maxlength="100" name="Title" required="required" type="text" placeholder="Type title" />
-        <label for="inputText">Note&#39;s body</label>
-        <textarea id="inputText" placeholder="Type your message here" cols="70" name="Notes Body" required="required" rows="10" ></textarea>
-        <fieldset class="fieldsets">
-            <button type="submit" name="sendButton" class="button" id="sendButton">Send data</button>
-        </fieldset>
-        <button type="reset" name="clearButton" class="button" id="clearButton">Clear fields</button>
-    </form>
+    <div class="messageList">
+        <div class="listHeadline">
+            <div class="messageTitle">Titles</div>
+            <div class="messageDate">Dates</div>
+            <div class="messageButtons">Buttons</div>
+        </div>
+        <div class="listContent">
+        </div>
+    </div>
 
     <script src="jquery-3.7.0.min.js"></script>
     <script src="script.js"></script>
-</body>
-
-</html>
+</body></html>

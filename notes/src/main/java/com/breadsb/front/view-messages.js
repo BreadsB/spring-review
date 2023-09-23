@@ -17,6 +17,7 @@ $(document).ready(function () {
     var modal = $('.modal');
     var inputTitle = $('#inputTitle');
     var inputText = $('#inputText');
+    var fetchedMessagesList;
 
     function getMessageBodyButton(button, messageBody) {
         var closeBodyText = 'Close body';
@@ -49,7 +50,7 @@ $(document).ready(function () {
             title: inputTitleValue,
             body: inputTextValue
         };
-        
+
         $.ajax({
             url: requestUrl,
             method: 'POST',
@@ -127,6 +128,10 @@ $(document).ready(function () {
     }
 
     function getMessages(messages) {
+
+        sortList(messages);
+        fetchedMessagesList = messages;
+
         $('#paginationMenu').pagination({
             dataSource: messages,
             pageSize: 10,
@@ -142,12 +147,85 @@ $(document).ready(function () {
         messagesList.slideDown(1000);
     }
 
+    function sortList(messages) {
+        var actualSelectedOption = sortingBlock.val();
+        messages.sort(function (a, b) {
+            var aDate = new Date(a.createdAt);
+            var bDate = new Date(b.createdAt);
+
+            switch (actualSelectedOption) {
+                case 'sortDateUp':
+                    if (aDate < bDate) {
+                        return -1;
+                    } else if (aDate > bDate) {
+                        return 1;
+                    } else {
+                        var aTime = aDate.getTime();
+                        var bTime = bDate.getTime();
+
+                        if (aTime < bTime) {
+                            return 1;
+                        } else if (aTime > bTime) {
+                            return -1;
+                        } else {
+                            return 0;
+                        }
+                    }
+                    break;
+                case 'sortDateDown':
+                    if (aDate < bDate) {
+                        return 1;
+                    } else if (aDate > bDate) {
+                        return -1;
+                    } else {
+                        var aTime = aDate.getTime();
+                        var bTime = bDate.getTime();
+
+                        if (aTime < bTime) {
+                            return -1;
+                        } else if (aTime > bTime) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    }
+                    break;
+                case 'sortTitleUp':
+                    var aTitle = a.title;
+                    var bTitle = b.title;
+
+                    if (aTitle > bTitle) {
+                        return 1;
+                    } else if (aTitle < bTitle) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                    break;
+                case 'sortTitleDown':
+                    var aTitle = a.title;
+                    var bTitle = b.title;
+
+                    if (aTitle > bTitle) {
+                        return -1;
+                    } else if (aTitle < bTitle) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                    break;
+            }
+        });
+
+        return messages;
+    }
+
     function displayData(data) {
         messagesList.empty();
+        var actualSelectedOption = sortingBlock.val();
         data.forEach(function (element) {
             createMessage(element).appendTo(messagesList);
         });
-        sortMessageList();
     }
 
     function updateMessage(button, title, body, id) {
@@ -228,7 +306,7 @@ $(document).ready(function () {
                             success: function () {
                                 console.log("Message has been deleted");
                                 message.remove();
-                                getAllMessages();
+                                showConfirm();
                             },
                             error: function () {
                                 console.log("error at deleting");
@@ -258,33 +336,12 @@ $(document).ready(function () {
     }
 
     sortingBlock.change(function () {
-        var selectedOption = $(this).val();
-        var listItems = messagesList.children("li").get();
+        var listItems = fetchedMessagesList;
+        sortList(listItems);
+        messagesList.empty();
 
-        listItems.sort(function (a, b) {
-            var aTitle = $(a).find(".messageTitleBlock").text();
-            var bTitle = $(b).find(".messageTitleBlock").text();
-            var aDate = $(a).find(".messageDateBlock").text();
-            var bDate = $(b).find(".messageDateBlock").text();
-
-            switch (selectedOption) {
-                case 'sortDateUp':
-                    return aDate.localeCompare(bDate);
-                    break;
-                case 'sortDateDown':
-                    return bDate.localeCompare(aDate);
-                    break;
-                case 'sortTitleUp':
-                    return aTitle.localeCompare(bTitle);
-                    break;
-                case 'sortTitleDown':
-                    return bTitle.localeCompare(aTitle);
-                    break;
-            }
-        });
-
-        $.each(listItems, function (i, li) {
-            messagesList.append(li);
+        listItems.forEach(function (element) {
+            createMessage(element).appendTo(messagesList);
         });
     });
 
@@ -338,22 +395,31 @@ $(document).ready(function () {
         listItems.sort(function (a, b) {
             var aTitle = $(a).find(".messageTitleBlock").text();
             var bTitle = $(b).find(".messageTitleBlock").text();
-            var aDate = $(a).find(".messageDateBlock").text();
-            var bDate = $(b).find(".messageDateBlock").text();
+            var aDateTime = $(a).find(".messageDateBlock").text();
+            var bDateTime = $(b).find(".messageDateBlock").text();
+
+            var aDate = aDateTime[0];
+            var bDate = bDateTime[0];
+            var aTime = aDateTime[1];
+            var bTime = bDateTime[1];
 
             switch (actualSelectedOption) {
                 case 'sortDateUp':
-                    return aDate.localeCompare(bDate);
-                    break;
+                    var dateComparison = aDate.localeCompare(bDate);
+                    if (dateComparison === 0) {
+                        return aTime.localeCompare(bTime);
+                    }
+                    return dateComparison;
                 case 'sortDateDown':
-                    return bDate.localeCompare(aDate);
-                    break;
+                    var dateComparison = bDate.localeCompare(aDate);
+                    if (dateComparison === 0) {
+                        return bTime.localeCompare(aTime);
+                    }
+                    return dateComparison;
                 case 'sortTitleUp':
                     return aTitle.localeCompare(bTitle);
-                    break;
                 case 'sortTitleDown':
                     return bTitle.localeCompare(aTitle);
-                    break;
             }
         });
 
@@ -363,7 +429,7 @@ $(document).ready(function () {
     }
 
     function showConfirm() {
-        var confirmDiv = $('<div>').attr('id','toast').addClass('show').addClass('success').text("Success");
+        var confirmDiv = $('<div>').attr('id', 'toast').addClass('show').addClass('success').text("Success");
         htmlBody.append(confirmDiv);
 
         setTimeout(function () {
