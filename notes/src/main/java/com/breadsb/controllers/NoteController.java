@@ -20,6 +20,7 @@ import java.util.List;
 public class NoteController {
 
     private final NoteService service;
+    private final String apiPath = "http://localhost:8080/api/notes/";
 
     @GetMapping("{id}")
     public ResponseEntity<Note> get(@PathVariable Long id) {
@@ -29,7 +30,7 @@ public class NoteController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> post(@Valid @RequestBody Note note) {
         service.createNote(note);
-        String uri = "http://localhost:8080/api/notes/" + note.getId();
+        String uri = apiPath + note.getId();
         return ResponseEntity.created(URI.create(uri)).build();
     }
 
@@ -41,7 +42,7 @@ public class NoteController {
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Note> put(@PathVariable Long id, @Valid @RequestBody Note note) {
         service.updateNote(id, note);
-        String uri = "http://localhost:8080/api/notes/" + id;
+        String uri = apiPath + id;
         return ResponseEntity.created(URI.create(uri)).build();
     }
 

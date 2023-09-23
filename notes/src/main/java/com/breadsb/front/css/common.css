@@ -1,9 +1,9 @@
 body {
-    margin: 0;
+    margin: 50px 0 0 0;
     box-sizing: border-box;
     font-family: 'Quicksand', sans-serif;
 /*    background-image: linear-gradient(to bottom right, #FD8451, #FFBD6F);*/
-    background-image: #A0AECD;
+    background: #A0AECD;
     min-height: 100vh;
     overflow-y: hidden;
 }

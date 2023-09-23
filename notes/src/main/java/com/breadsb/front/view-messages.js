@@ -59,7 +59,6 @@ $(document).ready(function () {
             data: JSON.stringify(noteData),
             success: function (response) {
                 if (response.status === 201) {
-                    console.log('Dane zostały przesłane na serwer.');
                     showConfirm();
                 }
             },
@@ -304,12 +303,11 @@ $(document).ready(function () {
                             url: connectionURL + messageId,
                             method: 'DELETE',
                             success: function () {
-                                console.log("Message has been deleted");
                                 message.remove();
                                 showConfirm();
                             },
-                            error: function () {
-                                console.log("error at deleting");
+                            error: function (response) {
+                                console.log("ERROR: Did not deleted message. " + response);
                             }
                         });
                         $(this).dialog("close");
