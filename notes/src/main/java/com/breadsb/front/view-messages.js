@@ -364,6 +364,16 @@ $(document).ready(function () {
                     console.log("Error");
                 }
             })
+        } else {
+            $.ajax({
+                url: apiRoot,
+                method: "GET",
+                contentType: "application/json",
+                success: getMessages,
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error");
+                }
+            })
         }
     });
 
