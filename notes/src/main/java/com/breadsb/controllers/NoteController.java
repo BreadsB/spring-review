@@ -40,7 +40,7 @@ public class NoteController {
             @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
     })
     @GetMapping("{id}")
-    public ResponseEntity<Note> get(@Parameter(description = "Id of a book to search for") @PathVariable Long id) {
+    public ResponseEntity<Note> get(@Parameter(description = "Id of a book to search") @PathVariable Long id) {
         return ResponseEntity.ok(service.getNoteById(id));
     }
 
@@ -51,7 +51,7 @@ public class NoteController {
             @ApiResponse(responseCode = "415", description = "Nothing has been send (null value)", content = @Content)
     })
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> post(@Parameter(description = "Note JSON object to be transfered") @Valid @RequestBody Note note) {
+    public ResponseEntity<Void> post(@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Note JSON object to be transfered") @Valid @RequestBody Note note) {
         service.createNote(note);
         String uri = apiPath + note.getId();
         return ResponseEntity.created(URI.create(uri)).build();
@@ -80,7 +80,7 @@ public class NoteController {
     })
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Note> put(@Parameter(description = "Id of a Note to update") @PathVariable Long id,
-                                    @Parameter(description = "") @Valid @RequestBody Note note) {
+                                    @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Note JSON object") @Valid @RequestBody Note note) {
         service.updateNote(id, note);
         String uri = apiPath + id;
         return ResponseEntity.created(URI.create(uri)).build();
@@ -104,12 +104,12 @@ public class NoteController {
     @Operation(summary = "Find all messages created at supplied Date&Time")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "200", description = "Found notes", content = @Content),
-            @ApiResponse(responseCode = "404", description = "No message found", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Notes not found", content = @Content),
             @ApiResponse(responseCode = "415", description = "Null DateTime parameter", content = @Content)
     })
     @GetMapping(value = "by-date/")
     public ResponseEntity<List<Note>> getNotesByDate(
-            @Parameter(description = "Date of creation of notes to search")
+            @Parameter(description = "Time and date when notes were created")
             @RequestParam("timestamp")
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime localDate) {
         return ResponseEntity.ok(service.findByCreatedAt(localDate));

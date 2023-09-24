@@ -1,5 +1,6 @@
 package com.breadsb.entities;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @ToString
+@Schema(description = "Note JSON object")
 public class Note {
 
     @Id
@@ -22,9 +24,11 @@ public class Note {
     private Long id;
 
     @NotNull
+    @Schema(description = "Title of the Note", accessMode = Schema.AccessMode.READ_WRITE)
     private String title;
 
     @NotNull
+    @Schema(description = "Body of the Note", accessMode = Schema.AccessMode.READ_WRITE)
     private String body;
 
     @Column(name = "created_at", updatable = false)
