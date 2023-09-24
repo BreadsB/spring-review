@@ -353,7 +353,8 @@ $(document).ready(function () {
             var requestData = {
                 timestamp: pickedDate + "T00:00:00"
             }
-
+            console.log(requestData);
+            
             $.ajax({
                 url: connectionURL,
                 method: "GET",
