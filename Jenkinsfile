@@ -1,9 +1,5 @@
-pipleline {
+pipeline {
     agent any
-
-    enviroment {
-
-    }
 
     tools {
         jdk 'java-17'
