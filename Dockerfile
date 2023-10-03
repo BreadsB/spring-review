@@ -1,5 +1,4 @@
 FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /notes
-VOLUME /tmp
-COPY build/libs/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+COPY build/libs/spring-review-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
