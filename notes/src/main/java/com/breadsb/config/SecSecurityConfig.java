@@ -1,7 +1,9 @@
 package com.breadsb.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -13,7 +15,14 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@PropertySource(value = "classpath:/security-config.properties")
 public class SecSecurityConfig {
+
+    @Value("security.login.user")
+    private String userLogin;
+
+    @Value("security.password.user")
+    private String userPassword;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -23,8 +32,8 @@ public class SecSecurityConfig {
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
         UserDetails user = User
-                .withUsername("aaa")
-                .password(passwordEncoder().encode("bbb"))
+                .withUsername(userLogin)
+                .password(passwordEncoder().encode(userPassword))
                 .roles("USER")
                 .build();
 
