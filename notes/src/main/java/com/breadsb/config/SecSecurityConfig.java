@@ -43,6 +43,10 @@ public class SecSecurityConfig {
                         .defaultSuccessUrl("/view-messages", true)
                         .permitAll()
                 )
+                .sessionManagement(session -> session
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(true)
+                )
                 .logout(logout -> logout
                         .permitAll()
                         .deleteCookies("JSESSIONID")
