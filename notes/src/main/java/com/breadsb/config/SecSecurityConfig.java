@@ -15,13 +15,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@PropertySource(value = "classpath:/security-config.properties")
+@PropertySource("classpath:security-config.properties")
 public class SecSecurityConfig {
 
-    @Value("security.login.user")
+    @Value("${security.login.user}")
     private String userLogin;
 
-    @Value("security.password.user")
+    @Value("${security.password.user}")
     private String userPassword;
 
     @Bean
@@ -55,6 +55,9 @@ public class SecSecurityConfig {
                 .sessionManagement(session -> session
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(true)
+                )
+                .csrf(csrf -> csrf
+                        .disable()
                 )
                 .logout(logout -> logout
                         .permitAll()

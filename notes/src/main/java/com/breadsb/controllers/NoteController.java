@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -39,6 +40,7 @@ public class NoteController {
             @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
             @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
     })
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("{id}")
     public ResponseEntity<Note> get(@Parameter(description = "Id of a book to search") @PathVariable Long id) {
         return ResponseEntity.ok(service.getNoteById(id));
@@ -50,6 +52,7 @@ public class NoteController {
             @ApiResponse(responseCode = "400", description = "Invalid Note parameters supplied", content = @Content),
             @ApiResponse(responseCode = "415", description = "Nothing has been send (null value)", content = @Content)
     })
+    @PreAuthorize("hasRole('USER')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> post(@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Note JSON object to be transfered") @Valid @RequestBody Note note) {
         service.createNote(note);
@@ -66,6 +69,7 @@ public class NoteController {
                             )
                     })
     })
+    @PreAuthorize("hasRole('USER')")
     @GetMapping
     public ResponseEntity<List<Note>> getAll() {
         return ResponseEntity.ok(service.getAllNotes());
@@ -78,6 +82,7 @@ public class NoteController {
             @ApiResponse(responseCode = "400", description = "Invalid id format", content = @Content),
             @ApiResponse(responseCode = "415", description = "No object has been sent (null value)", content = @Content)
     })
+    @PreAuthorize("hasRole('USER')")
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Note> put(@Parameter(description = "Id of a Note to update") @PathVariable Long id,
                                     @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Note JSON object") @Valid @RequestBody Note note) {
@@ -92,6 +97,7 @@ public class NoteController {
             @ApiResponse(responseCode = "404", description = "Note not found", content = @Content),
             @ApiResponse(responseCode = "400", description = "Invalid id format", content = @Content)
     })
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@Parameter(description = "Id of a Note to delete") @PathVariable Long id) {
         service.deleteNoteById(id);
@@ -107,6 +113,7 @@ public class NoteController {
             @ApiResponse(responseCode = "404", description = "Notes not found", content = @Content),
             @ApiResponse(responseCode = "415", description = "Null DateTime parameter", content = @Content)
     })
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "by-date/")
     public ResponseEntity<List<Note>> getNotesByDate(
             @Parameter(description = "Time and date when notes were created")
