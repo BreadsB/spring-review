@@ -37,3 +37,4 @@ out/
 .vscode/
 /src/main/java/com/breadsb/springreview/connection/LoginData.java
 
+/notes/src/main/resources/security-config.properties

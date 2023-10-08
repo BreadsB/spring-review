@@ -19,6 +19,8 @@ dependencies {
 //    Extra annotations for SwaggerUI
     annotationProcessor 'com.github.therapi:therapi-runtime-javadoc-scribe:0.13.0'
     implementation 'com.github.therapi:therapi-runtime-javadoc:0.13.0'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
 }
 
 test {

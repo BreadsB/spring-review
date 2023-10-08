@@ -12,5 +12,6 @@ public class NotesSpringApp {
 
     public static void main(String[] args) {
         SpringApplication.run(NotesSpringApp.class ,args);
+        System.out.println("classpath:/src/");
     }
 }
