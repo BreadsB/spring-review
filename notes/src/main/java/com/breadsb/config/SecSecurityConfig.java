@@ -46,7 +46,9 @@ public class SecSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/**")
+                        .requestMatchers("/login")
+                        .permitAll()
+                        .requestMatchers("/app**")
                         .hasRole("USER")
                         .anyRequest().authenticated()
                 )
@@ -60,14 +62,10 @@ public class SecSecurityConfig {
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(true)
                 )
-//                .csrf(csrf -> csrf
-//                        .disable()
-//                )
                 .logout(logout -> logout
                         .permitAll()
                         .deleteCookies("JSESSIONID")
                 );
-
         return http.build();
     }
 }

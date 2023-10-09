@@ -18,7 +18,14 @@ $(document).ready(function () {
     var inputTitle = $('#inputTitle');
     var inputText = $('#inputText');
     var fetchedMessagesList;
-
+    
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    
+    $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+        jqXHR.setRequestHeader('X-CSRF-Token', token);
+    });
+    
     function getMessageBodyButton(button, messageBody) {
         var closeBodyText = 'Close body';
 
@@ -33,7 +40,7 @@ $(document).ready(function () {
 
     createMessageButton.on('click', function () {
         modal.show();
-    });
+    }); 
 
     cancelCreationButton.on('click', function () {
         modal.hide();
@@ -50,17 +57,12 @@ $(document).ready(function () {
             title: inputTitleValue,
             body: inputTextValue
         };
-
-        var csrfToken = $("meta[name='_csrf']").attr("content");
-
+        
         $.ajax({
             url: requestUrl,
             method: 'POST',
             processData: false,
             contentType: "application/json; charset=utf-8",
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("X-CSRF-TOKEN", csrfToken);
-            },
             data: JSON.stringify(noteData),
             success: function (response) {
                 if (response.status === 201) {
@@ -253,16 +255,12 @@ $(document).ready(function () {
         button.on('click', function () {
             var newTitle = titleInput.val();
             var newBody = bodyInput.val();
-            var csrfToken = $("meta[name='_csrf']").attr("content");
 
             $.ajax({
                 url: connectionURL + messageId,
                 method: 'PUT',
                 processData: false,
                 contentType: "application/json; charset=utf-8",
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("X-CSRF-TOKEN", csrfToken);
-                },
                 data: JSON.stringify({
                     "title": newTitle,
                     "body": newBody
@@ -308,14 +306,10 @@ $(document).ready(function () {
                 resizable: false,
                 buttons: {
                     Yes: function () {
-                        var csrfToken = $("meta[name='_csrf']").attr("content");
                         
                         $.ajax({
                             url: connectionURL + messageId,
                             method: 'DELETE',
-                            beforeSend: function(xhr) {
-                                xhr.setRequestHeader("X-CSRF-TOKEN", csrfToken);
-                            },
                             success: function () {
                                 message.remove();
                                 showConfirm();
