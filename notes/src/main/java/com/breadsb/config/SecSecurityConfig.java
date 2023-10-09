@@ -32,10 +32,8 @@ public class SecSecurityConfig {
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
         UserDetails user = User
-//                .withUsername(userLogin)
-                .withUsername("aaa")
-//                .password(passwordEncoder().encode(userPassword))
-                .password(passwordEncoder().encode("bbb"))
+                .withUsername(userLogin)
+                .password(passwordEncoder().encode(userPassword))
                 .roles("USER")
                 .build();
 
