@@ -32,8 +32,10 @@ public class SecSecurityConfig {
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
         UserDetails user = User
-                .withUsername(userLogin)
-                .password(passwordEncoder().encode(userPassword))
+//                .withUsername(userLogin)
+                .withUsername("aaa")
+//                .password(passwordEncoder().encode(userPassword))
+                .password(passwordEncoder().encode("bbb"))
                 .roles("USER")
                 .build();
 
@@ -44,6 +46,8 @@ public class SecSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(request -> request
+                        .requestMatchers("/**")
+                        .hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -56,9 +60,9 @@ public class SecSecurityConfig {
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(true)
                 )
-                .csrf(csrf -> csrf
-                        .disable()
-                )
+//                .csrf(csrf -> csrf
+//                        .disable()
+//                )
                 .logout(logout -> logout
                         .permitAll()
                         .deleteCookies("JSESSIONID")
