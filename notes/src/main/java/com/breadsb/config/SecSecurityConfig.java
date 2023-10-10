@@ -44,10 +44,10 @@ public class SecSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(request -> request
+                        .requestMatchers("/app/**")
+                        .hasRole("USER")
                         .requestMatchers("/login")
                         .permitAll()
-                        .requestMatchers("/app**")
-                        .hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -58,12 +58,15 @@ public class SecSecurityConfig {
                 )
                 .sessionManagement(session -> session
                         .maximumSessions(1)
-                        .maxSessionsPreventsLogin(true)
+//                        .maxSessionsPreventsLogin(true)
+
                 )
                 .logout(logout -> logout
-                        .permitAll()
+                        .logoutUrl("/perform_logout")
                         .deleteCookies("JSESSIONID")
+                        .permitAll()
                 );
+
         return http.build();
     }
 }

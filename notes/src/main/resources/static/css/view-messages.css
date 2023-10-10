@@ -301,6 +301,19 @@ form {
     border: none;
 }
 
+.logout-block {
+    display: flex;
+    position: absolute;
+    top: 50px;
+    right: 40px;
+    height: 40px;
+    width: 70px;
+    background-color: pink;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
 .fieldsets {
     border: none;
     margin: 10px 0 0 0;

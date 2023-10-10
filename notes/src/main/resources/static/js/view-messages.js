@@ -25,7 +25,12 @@ $(document).ready(function () {
     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
         jqXHR.setRequestHeader('X-CSRF-Token', token);
     });
-    
+
+    $('#logoutLink').on('click', function(e) {
+        e.preventDefault();
+        document.logoutForm.submit();
+    });
+
     function getMessageBodyButton(button, messageBody) {
         var closeBodyText = 'Close body';
 
@@ -57,7 +62,7 @@ $(document).ready(function () {
             title: inputTitleValue,
             body: inputTextValue
         };
-        
+
         $.ajax({
             url: requestUrl,
             method: 'POST',
